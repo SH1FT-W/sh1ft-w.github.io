@@ -8,6 +8,9 @@
   if (!script) return;
   const current = script.dataset.project || "";
   const base = new URL(".", script.src).href;
+  // Follows the page language (<html lang>), also when the page switches it later.
+  const de = () => /^de/i.test(document.documentElement.lang);
+  const soonText = () => (de() ? "Demnächst" : "Coming soon");
 
   function render() {
     const projects = window.SH1FTW_PROJECTS || [];
@@ -20,7 +23,7 @@
     const items = projects.map((p) => {
       const on = p.id === current;
       const href = on ? "#" : p.site || base + "#" + p.id;
-      const label = p.name + (p.soon ? " (coming soon)" : "");
+      const label = p.name + (p.soon ? " (" + soonText() + ")" : "");
       return `<a class="p${on ? " on" : ""}${p.soon ? " soon" : ""}" href="${esc(href)}" style="--c:${esc(p.color)}"
         data-name="${esc(p.name)}"${p.soon ? ' data-soon=""' : ""} aria-label="${esc(label)}"${on ? ' aria-current="page"' : ""}>
         <span class="ic${p.iconStyle ? " " + esc(p.iconStyle) : ""}"><img src="${esc(base + p.icon)}" alt=""></span>${on ? `<b aria-hidden="true">${esc(p.name)}</b>` : ""}</a>`;
@@ -76,7 +79,7 @@
       }
       @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
     </style>
-    <nav aria-label="SH1FT-W projects"><a class="home" href="${esc(base + (current ? "?from=" + encodeURIComponent(current) : ""))}" title="All SH1FT-W projects">SH1FT-W</a><span class="sep" aria-hidden="true"></span>${items}</nav><div class="tip" role="presentation"></div>`;
+    <nav aria-label="SH1FT-W projects"><a class="home" href="${esc(base + (current ? "?from=" + encodeURIComponent(current) : ""))}" title="${de() ? "Alle SH1FT-W-Projekte" : "All SH1FT-W projects"}">SH1FT-W</a><span class="sep" aria-hidden="true"></span>${items}</nav><div class="tip" role="presentation"></div>`;
 
     const nav = root.querySelector("nav");
     const tip = root.querySelector(".tip");
@@ -85,7 +88,7 @@
     let hideTimer;
     const show = (a) => {
       clearTimeout(hideTimer);
-      tip.innerHTML = esc(a.dataset.name) + (a.hasAttribute("data-soon") ? "<i>Coming soon</i>" : "");
+      tip.innerHTML = esc(a.dataset.name) + (a.hasAttribute("data-soon") ? "<i>" + soonText() + "</i>" : "");
       const r = a.getBoundingClientRect(), hr = host.getBoundingClientRect();
       const w = tip.offsetWidth;
       const x = Math.min(Math.max(8, r.left - hr.left + r.width / 2 - w / 2), hr.width - w - 8);

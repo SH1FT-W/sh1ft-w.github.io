@@ -14,6 +14,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Inter is only a fallback for systems without San Francisco; Apple devices never download it. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap">
+<script>
+  // Language: saved choice (shared by all SH1FT-W pages on this origin), else the browser's first language.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem("sh1ftw-lang"); } catch (e) {}
+    var pref = saved || ((navigator.languages && navigator.languages[0]) || navigator.language || "en");
+    document.documentElement.lang = /^de/i.test(pref) ? "de" : "en";
+  })();
+</script>
 <style>
   :root {
     --bg: #f5f5f7; --ink: #1d1d1f; --ink-2: #6e6e73; --line: #d2d2d7; --hover: rgba(0,0,0,.035);
@@ -39,7 +48,7 @@
     font: 17px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, "Segoe UI", Roboto, system-ui, sans-serif;
     letter-spacing: -.022em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   a { color: inherit; }
-  .wrap { max-width: 820px; margin: 0 auto;
+  .wrap { position: relative; max-width: 820px; margin: 0 auto;
     padding: 112px max(24px, env(safe-area-inset-right)) 56px max(24px, env(safe-area-inset-left)); }
 
   /* Header */
@@ -107,6 +116,16 @@
   .soon-label { font-size: 12px; font-weight: 500; letter-spacing: 0; line-height: 1; padding: 4px 8px; border-radius: 99px;
     background: var(--pill); color: var(--ink-2); transform: translateY(-2px); }
 
+  /* Bilingual: static text exists twice, the page language hides the other one */
+  html[lang="de"] .en, html[lang="en"] .de { display: none !important; }
+  .lang { position: absolute; top: 28px; right: max(24px, env(safe-area-inset-right)); display: inline-flex;
+    border-radius: 99px; background: var(--pill); padding: 2px; }
+  .lang button { font: inherit; font-size: 12px; font-weight: 500; letter-spacing: 0; border: 0; background: none; color: var(--ink-2);
+    padding: 4px 10px; border-radius: 99px; cursor: pointer; transition: color .2s, background .2s; }
+  .lang button:hover { color: var(--ink); }
+  .lang button.on { background: var(--tile); color: var(--ink); box-shadow: 0 0 0 .5px var(--tile-ring), 0 1px 2px rgba(0,0,0,.06); }
+  .lang button:focus-visible { outline: 3px solid color-mix(in srgb, var(--link) 60%, transparent); outline-offset: 1px; }
+
   footer { margin-top: 72px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 12px; letter-spacing: -.005em;
     display: flex; flex-wrap: wrap; gap: 6px 20px; }
   footer a { text-decoration: none; }
@@ -127,6 +146,7 @@
     .title { font-size: 19px; }
     .tag { font-size: 16px; line-height: 1.4; margin-top: 2px; }
     .links { margin-top: 6px; }
+    .lang { top: 20px; right: 20px; }
   }
   @media (max-width: 360px) { .wrap { padding-left: 16px; padding-right: 16px; } }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -134,17 +154,21 @@
 </head>
 <body>
 <main class="wrap">
+  <div class="lang" role="group" aria-label="Language">
+    <button data-l="de" lang="de">DE</button><button data-l="en" lang="en">EN</button>
+  </div>
   <header>
     <h1>SH1FT-W</h1>
-    <p class="lead">Small, careful tools for the smart home and the Mac.</p>
-    <p class="about">An independent, one-person open source workshop. Everything runs locally: no cloud accounts, no tracking.</p>
+    <p class="lead"><span class="en">Small, careful tools for the smart home and the Mac.</span><span class="de">Kleine, sorgfältige Werkzeuge für das smarte Zuhause und den Mac.</span></p>
+    <p class="about"><span class="en">An independent, one-person open source workshop. Everything runs locally: no cloud accounts, no tracking.</span><span class="de">Eine unabhängige Open-Source-Werkstatt, von einer Person betrieben. Alles läuft lokal: keine Cloud-Konten, kein Tracking.</span></p>
     <div id="back"></div>
   </header>
   <div id="list"></div>
   <footer>
     <a href="https://github.com/SH1FT-W">github.com/SH1FT-W</a>
-    <span>Get new releases by email: on a project's GitHub page, choose Watch › Custom › Releases.</span>
-    <span>No tracking on this site.</span>
+    <span class="en">Get new releases by email: on a project's GitHub page, choose Watch › Custom › Releases.</span>
+    <span class="de">Neue Versionen per E-Mail: auf der GitHub-Seite eines Projekts Watch › Custom › Releases wählen.</span>
+    <span class="en">No tracking on this site.</span><span class="de">Diese Seite trackt nicht.</span>
   </footer>
 </main>
 <script src="projects.js"></script>
@@ -154,24 +178,27 @@
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   const from = new URLSearchParams(location.search).get("from");
   const origin = projects.find((p) => p.id === from && !p.soon);
+  const T = {
+    en: { back: (n) => "Back to " + n, soon: "Coming soon", visit: "Visit website", site: (n) => n + " website", gh: (n) => n + " on GitHub",
+          latest: "Latest release", desc: "Small, careful open source tools for Home Assistant and the Mac. Local first, no cloud accounts, no tracking." },
+    de: { back: (n) => "Zurück zu " + n, soon: "Demnächst", visit: "Zur Website", site: (n) => "Website von " + n, gh: (n) => n + " auf GitHub",
+          latest: "Neueste Version", desc: "Kleine, sorgfältige Open-Source-Werkzeuge für Home Assistant und den Mac. Lokal, ohne Cloud-Konten, ohne Tracking." },
+  };
+  let t = T.en, lang = "en";
   const icon = (p) => `<span class="ic${p.iconStyle ? " " + esc(p.iconStyle) : ""}"><img src="${esc(p.icon)}" alt=""></span>`;
 
-  if (origin) {
-    document.getElementById("back").innerHTML =
-      `<a class="back" href="${esc(origin.site)}" style="--c:${esc(origin.color)}"><span class="chev" aria-hidden="true">‹</span>${icon(origin)}Back to ${esc(origin.name)}</a>`;
-  }
 
   const row = (p) => {
     const isFrom = origin && origin.id === p.id;
     const cls = `row ${p.soon ? "soon" : "live"}${isFrom ? " from" : ""}`;
     const head = p.soon
-      ? `<h3 class="title">${esc(p.name)}<span class="soon-label">Coming soon</span></h3>`
+      ? `<h3 class="title">${esc(p.name)}<span class="soon-label">${t.soon}</span></h3>`
       : `<h3 class="title">${esc(p.name)}<span class="ver" data-ver="${esc(p.id)}"></span></h3>`;
     const links = p.soon ? "" :
-      `<div class="links"><a class="site" href="${esc(p.site)}" aria-label="${esc(p.name)} website">Visit website<span class="chev" aria-hidden="true">›</span></a>` +
-      `<a class="gh" href="https://github.com/${esc(p.repo)}" aria-label="${esc(p.name)} on GitHub">GitHub<span class="chev" aria-hidden="true">›</span></a></div>`;
+      `<div class="links"><a class="site" href="${esc(p.site)}" aria-label="${esc(t.site(p.name))}">${t.visit}<span class="chev" aria-hidden="true">›</span></a>` +
+      `<a class="gh" href="https://github.com/${esc(p.repo)}" aria-label="${esc(t.gh(p.name))}">GitHub<span class="chev" aria-hidden="true">›</span></a></div>`;
     return `<li class="${cls}" id="${esc(p.id)}" style="--c:${esc(p.color)}"${isFrom ? ' aria-current="true"' : ""}>
-      ${icon(p)}<div>${head}<p class="tag">${esc(p.tagline)}</p>${links}</div></li>`;
+      ${icon(p)}<div>${head}<p class="tag">${esc((lang === "de" && p.tagline_de) || p.tagline)}</p>${links}</div></li>`;
   };
 
   const labels = window.SH1FTW_GROUP_LABELS || {};
@@ -183,8 +210,29 @@
     if (!g) groups.push((g = { name: p.platform, items: [] }));
     g.items.push(p);
   });
-  document.getElementById("list").innerHTML = groups.map((g) =>
-    `<section aria-label="${esc(label(g.name))}"><h2>${esc(label(g.name))}</h2><ul class="list">${g.items.map(row).join("")}</ul></section>`).join("");
+  const versions = {};
+  function render(l) {
+    lang = l; t = T[l];
+    document.documentElement.lang = l;
+    document.querySelector('meta[name="description"]').content = t.desc;
+    document.querySelectorAll(".lang button").forEach((b) => b.classList.toggle("on", b.dataset.l === l));
+    if (origin) {
+      document.getElementById("back").innerHTML =
+        `<a class="back" href="${esc(origin.site)}" style="--c:${esc(origin.color)}"><span class="chev" aria-hidden="true">‹</span>${icon(origin)}${esc(t.back(origin.name))}</a>`;
+    }
+    document.getElementById("list").innerHTML = groups.map((g) =>
+      `<section aria-label="${esc(label(g.name))}"><h2>${esc(label(g.name))}</h2><ul class="list">${g.items.map(row).join("")}</ul></section>`).join("");
+    Object.keys(versions).forEach(showVer);
+  }
+  function showVer(id) {
+    const el = document.querySelector(`[data-ver="${id}"]`);
+    if (el) { el.textContent = versions[id]; el.title = t.latest; }
+  }
+  render(document.documentElement.lang === "de" ? "de" : "en");
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => {
+    try { localStorage.setItem("sh1ftw-lang", b.dataset.l); } catch (e) {}
+    render(b.dataset.l);
+  }));
 
   // Latest release per project, live from GitHub (cached for the session, silent if offline or rate-limited).
   projects.filter((p) => p.repo && !p.soon).forEach(async (p) => {
@@ -198,8 +246,7 @@
         if (ver) try { sessionStorage.setItem(key, ver); } catch (e) {}
       } catch (e) {}
     }
-    const el = document.querySelector(`[data-ver="${p.id}"]`);
-    if (ver && el) { el.textContent = ver; el.title = "Latest release"; }
+    if (ver) { versions[p.id] = ver; showVer(p.id); }
   });
 })();
 </script>
