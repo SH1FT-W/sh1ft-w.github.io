@@ -2,85 +2,148 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SH1FT-W</title>
-<meta name="description" content="Small, careful tools for Home Assistant and the Mac. Open source.">
+<meta name="description" content="Small, careful open source tools for Home Assistant and the Mac. Local first, no cloud accounts, no tracking.">
 <meta property="og:title" content="SH1FT-W">
-<meta property="og:description" content="Small, careful tools for Home Assistant and the Mac. Open source.">
+<meta property="og:description" content="Small, careful open source tools for Home Assistant and the Mac. Local first, no cloud accounts, no tracking.">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<!-- Inter is only a fallback for systems without San Francisco; Apple devices never download it. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap">
 <style>
-  :root { --bg: #f6f5f2; --ink: #151515; --muted: #6f6b64; --line: #dcd8d0; --hover: #efede8; color-scheme: light; }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --bg: #121212; --ink: #efece6; --muted: #948f87; --line: #2b2a28; --hover: #1a1a19; color-scheme: dark; }
+  :root {
+    --bg: #f5f5f7; --ink: #1d1d1f; --ink-2: #6e6e73; --line: #d2d2d7; --hover: rgba(0,0,0,.035);
+    --tile: #fff; --tile-ring: rgba(0,0,0,.08); --link: #0066cc; --pill: rgba(0,0,0,.05);
+    --mix: #1d1d1f; color-scheme: light;
   }
-  :root[data-theme="dark"] { --bg: #121212; --ink: #efece6; --muted: #948f87; --line: #2b2a28; --hover: #1a1a19; color-scheme: dark; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #000; --ink: #f5f5f7; --ink-2: #a1a1a6; --line: #38383b; --hover: rgba(255,255,255,.055);
+      --tile: #1c1c1e; --tile-ring: rgba(255,255,255,.1); --link: #2997ff; --pill: rgba(255,255,255,.09);
+      --mix: #f5f5f7; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #000; --ink: #f5f5f7; --ink-2: #a1a1a6; --line: #38383b; --hover: rgba(255,255,255,.055);
+    --tile: #1c1c1e; --tile-ring: rgba(255,255,255,.1); --link: #2997ff; --pill: rgba(255,255,255,.09);
+    --mix: #f5f5f7; color-scheme: dark;
+  }
 
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.5 Figtree, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 72px 24px 64px; }
-  .kicker { font: 500 12.5px "JetBrains Mono", ui-monospace, monospace; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; }
-  h1 { font: 800 clamp(52px, 11vw, 80px)/1 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -.04em; margin: 14px 0 18px; }
-  .lead { color: var(--muted); font-size: 20px; max-width: 520px; margin: 0 0 52px; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, "Segoe UI", Roboto, system-ui, sans-serif;
+    letter-spacing: -.022em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  a { color: inherit; }
+  .wrap { max-width: 820px; margin: 0 auto;
+    padding: 112px max(24px, env(safe-area-inset-right)) 56px max(24px, env(safe-area-inset-left)); }
 
-  .back { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 28px; padding: 7px 14px 7px 8px; border-radius: 99px;
-    color: inherit; text-decoration: none; font-weight: 600; font-size: 15px;
-    background: color-mix(in srgb, var(--c) 14%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent); }
-  .back img { width: 24px; height: 24px; border-radius: 6px; }
-  .back:hover { background: color-mix(in srgb, var(--c) 22%, transparent); }
+  /* Header */
+  h1 { font: 700 72px/1.05 -apple-system, BlinkMacSystemFont, "SF Pro Display", Inter, system-ui, sans-serif;
+    letter-spacing: -.035em; margin: 0 0 16px; }
+  .lead { font-size: 28px; line-height: 1.18; font-weight: 600; letter-spacing: -.02em; color: var(--ink); margin: 0 0 12px; max-width: 700px; text-wrap: balance; }
+  .about { font-size: 17px; color: var(--ink-2); margin: 0; max-width: 560px; text-wrap: pretty; }
 
-  .row { position: relative; display: grid; grid-template-columns: 56px 1fr auto; gap: 22px; align-items: center;
-    padding: 24px 12px; margin: 0 -12px; border-top: 1px solid var(--line); border-radius: 0; transition: background .2s; }
-  .row:last-child { border-bottom: 1px solid var(--line); }
-  .row:not(.soon):hover { background: var(--hover); }
-  .row.from { background: color-mix(in srgb, var(--c) 9%, transparent); }
-  .row img { width: 56px; height: 56px; border-radius: 13px; display: block; }
-  .row h2 { font: 700 30px/1.15 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -.02em; margin: 0;
-    display: flex; flex-wrap: wrap; column-gap: 12px; row-gap: 2px; align-items: baseline; }
-  .row h2 small { font: 500 12px "JetBrains Mono", ui-monospace, monospace; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
-  .row h2 small [data-ver] { text-transform: none; }
-  .row p { margin: 3px 0 0; color: var(--muted); }
-  .row a.main { color: inherit; text-decoration: none; }
-  .row a.main::after { content: ""; position: absolute; inset: 0; }
-  .row a.main:focus-visible { outline: none; }
-  .row:has(a.main:focus-visible) { outline: 2px solid var(--c); outline-offset: -2px; }
-  .row:not(.soon):hover h2 a { color: var(--c); }
-  .side { display: flex; align-items: center; gap: 18px; }
-  .gh { position: relative; z-index: 1; color: var(--muted); font-size: 14px; font-weight: 600; text-decoration: none; padding: 4px 2px; }
-  .gh:hover { color: var(--ink); }
-  .arr { font-size: 26px; color: var(--muted); transition: transform .2s, color .2s; }
-  .row:not(.soon):hover .arr { transform: translateX(6px); color: var(--c); }
-  .row.soon { opacity: .55; }
-  .tag-from { font: 600 11px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .05em; text-transform: uppercase;
-    padding: 4px 8px; border-radius: 99px; color: var(--c); background: color-mix(in srgb, var(--c) 15%, transparent); }
+  /* Back pill (only with ?from=) */
+  #back:not(:empty) { margin-top: 40px; }
+  .back { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px 0 10px; border-radius: 99px;
+    background: var(--pill); color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 500; letter-spacing: -.01em;
+    transition: background .2s; }
+  .back:hover { background: color-mix(in srgb, var(--c) 18%, var(--pill)); }
+  .back .chev { font-size: 20px; line-height: 1; margin-top: -2px; color: var(--ink-2); }
+  .back .ic { --s: 22px; }
 
-  footer { margin-top: 56px; color: var(--muted); font-size: 14px; display: flex; gap: 20px; flex-wrap: wrap; }
-  footer a { color: inherit; }
-  footer a:hover { color: var(--ink); }
+  /* Sections */
+  section { margin-top: 72px; }
+  section + section { margin-top: 56px; }
+  h2 { font-size: 24px; line-height: 1.17; font-weight: 600; letter-spacing: -.015em; margin: 0 0 8px; }
 
-  @media (max-width: 640px) {
-    .wrap { padding: 48px 16px 48px; }
-    .lead { font-size: 18px; margin-bottom: 36px; }
-    .row { grid-template-columns: 44px 1fr; gap: 16px; padding: 20px 8px; margin: 0 -8px; align-items: start; }
-    .row img { width: 44px; height: 44px; border-radius: 11px; }
-    .row h2 { font-size: 25px; }
-    .side { grid-column: 2; }
-    .arr { display: none; }
+  /* Icon tile: every icon becomes the same rounded square, whatever padding its file has. */
+  .ic { --s: 56px; position: relative; flex: none; display: block; width: var(--s); height: var(--s);
+    border-radius: calc(var(--s) * .2237); overflow: hidden; isolation: isolate; }
+  .ic img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .ic.mac img { inset: -12.15%; width: 124.3%; height: 124.3%; }
+  .ic.glyph { background: var(--tile); }
+  .ic.glyph img { inset: 15%; width: 70%; height: 70%; }
+  .ic::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--tile-ring); }
+
+  /* Rows */
+  .list { list-style: none; margin: 0 -16px; padding: 0; }
+  .row { position: relative; display: grid; grid-template-columns: 56px 1fr; column-gap: 20px; align-items: start;
+    padding: 20px 16px; border-radius: 18px; transition: background .2s; }
+  /* hairline separators, inset to the text column like a native list */
+  .row + .row::before { content: ""; position: absolute; top: 0; left: 92px; right: 16px; border-top: 1px solid var(--line); }
+  .row:hover + .row::before, .row.from + .row::before, .row:has(+ .row:hover)::before, .row:hover::before, .row.from::before { border-color: transparent; }
+  .row.live:hover { background: var(--hover); }
+  .row.from { background: color-mix(in srgb, var(--c) 10%, transparent); }
+  .row.from:hover { background: color-mix(in srgb, var(--c) 14%, transparent); }
+
+  .title { display: flex; align-items: baseline; gap: 10px; margin: 0; font-size: 21px; line-height: 1.24; font-weight: 600; letter-spacing: -.015em; }
+  .title a { text-decoration: none; }
+  .ver { font-size: 14px; font-weight: 400; color: var(--ink-2); letter-spacing: -.005em; font-variant-numeric: tabular-nums; }
+  .tag { margin: 4px 0 0; color: var(--ink-2); text-wrap: pretty; }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 8px; font-size: 15px; letter-spacing: -.01em; }
+  .links a { color: var(--link); text-decoration: none; }
+  .links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .links .gh { position: relative; z-index: 1; color: var(--ink-2); }
+  .links .gh:hover { color: var(--ink); }
+  .links .chev { display: inline-block; margin-left: 2px; transition: transform .2s; }
+  .row.live:hover .site .chev { transform: translateX(3px); }
+  /* the website link covers the whole row, so any click on it opens the project site */
+  .site::after { content: ""; position: absolute; inset: 0; border-radius: 18px; }
+  a:focus-visible { outline: none; }
+  .back:focus-visible, .links .gh:focus-visible, footer a:focus-visible { outline: 3px solid color-mix(in srgb, var(--link) 60%, transparent); outline-offset: 2px; border-radius: 6px; }
+  .back:focus-visible { border-radius: 99px; }
+  .site:focus-visible::after { box-shadow: 0 0 0 3px color-mix(in srgb, var(--link) 60%, transparent); }
+
+  .row.soon .ic { opacity: .5; filter: saturate(.6); }
+  .row.soon .title { color: var(--ink-2); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .row.soon .ic { opacity: .62; } }
+  :root[data-theme="dark"] .row.soon .ic { opacity: .62; }
+  .soon-label { font-size: 12px; font-weight: 500; letter-spacing: 0; line-height: 1; padding: 4px 8px; border-radius: 99px;
+    background: var(--pill); color: var(--ink-2); transform: translateY(-2px); }
+
+  footer { margin-top: 72px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 12px; letter-spacing: -.005em;
+    display: flex; flex-wrap: wrap; gap: 6px 20px; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 734px) {
+    .wrap { padding: 72px 20px 40px; }
+    h1 { font-size: 48px; margin-bottom: 12px; }
+    .lead { font-size: 21px; line-height: 1.24; }
+    .about { font-size: 16px; }
+    section { margin-top: 56px; }
+    section + section { margin-top: 44px; }
+    h2 { font-size: 21px; }
+    .list { margin: 0 -12px; }
+    .row { grid-template-columns: 48px 1fr; column-gap: 16px; padding: 16px 12px; border-radius: 16px; }
+    .row + .row::before { left: 76px; right: 12px; }
+    .ic { --s: 48px; }
+    .title { font-size: 19px; }
+    .tag { font-size: 16px; line-height: 1.4; margin-top: 2px; }
+    .links { margin-top: 6px; }
   }
+  @media (max-width: 360px) { .wrap { padding-left: 16px; padding-right: 16px; } }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
 <main class="wrap">
-  <div class="kicker">Open source · Home Assistant · macOS</div>
-  <h1>SH1FT-W</h1>
-  <p class="lead">Small, careful tools for the smart home and the Mac.</p>
-  <div id="back"></div>
+  <header>
+    <h1>SH1FT-W</h1>
+    <p class="lead">Small, careful tools for the smart home and the Mac.</p>
+    <p class="about">An independent, one-person open source workshop. Everything runs locally: no cloud accounts, no tracking.</p>
+    <div id="back"></div>
+  </header>
   <div id="list"></div>
   <footer>
     <a href="https://github.com/SH1FT-W">github.com/SH1FT-W</a>
+    <span>No tracking on this site.</span>
   </footer>
 </main>
 <script src="projects.js"></script>
@@ -90,22 +153,37 @@
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   const from = new URLSearchParams(location.search).get("from");
   const origin = projects.find((p) => p.id === from && !p.soon);
+  const icon = (p) => `<span class="ic${p.iconStyle ? " " + esc(p.iconStyle) : ""}"><img src="${esc(p.icon)}" alt=""></span>`;
 
   if (origin) {
     document.getElementById("back").innerHTML =
-      `<a class="back" href="${esc(origin.site)}" style="--c:${esc(origin.color)}"><img src="${esc(origin.icon)}" alt="">← Back to ${esc(origin.name)}</a>`;
+      `<a class="back" href="${esc(origin.site)}" style="--c:${esc(origin.color)}"><span class="chev" aria-hidden="true">‹</span>${icon(origin)}Back to ${esc(origin.name)}</a>`;
   }
 
-  document.getElementById("list").innerHTML = projects.map((p) => {
-    const meta = `${esc(p.platform)}<span data-ver="${esc(p.id)}">${p.soon ? " · coming soon" : ""}</span>`;
-    const title = p.soon ? esc(p.name) : `<a class="main" href="${esc(p.site)}">${esc(p.name)}</a>`;
-    const side = p.soon ? "" :
-      `<div class="side"><a class="gh" href="https://github.com/${esc(p.repo)}">GitHub</a><span class="arr" aria-hidden="true">→</span></div>`;
-    return `<article class="row${p.soon ? " soon" : ""}${origin && origin.id === p.id ? " from" : ""}" id="${esc(p.id)}" style="--c:${esc(p.color)}">
-      <img src="${esc(p.icon)}" alt="">
-      <div><h2>${title}<small>${meta}</small>${origin && origin.id === p.id ? '<span class="tag-from">You came from here</span>' : ""}</h2>
-      <p>${esc(p.tagline)}</p></div>${side}</article>`;
-  }).join("");
+  const row = (p) => {
+    const isFrom = origin && origin.id === p.id;
+    const cls = `row ${p.soon ? "soon" : "live"}${isFrom ? " from" : ""}`;
+    const head = p.soon
+      ? `<h3 class="title">${esc(p.name)}<span class="soon-label">Coming soon</span></h3>`
+      : `<h3 class="title">${esc(p.name)}<span class="ver" data-ver="${esc(p.id)}"></span></h3>`;
+    const links = p.soon ? "" :
+      `<div class="links"><a class="site" href="${esc(p.site)}" aria-label="${esc(p.name)} website">Visit website<span class="chev" aria-hidden="true">›</span></a>` +
+      `<a class="gh" href="https://github.com/${esc(p.repo)}" aria-label="${esc(p.name)} on GitHub">GitHub<span class="chev" aria-hidden="true">›</span></a></div>`;
+    return `<li class="${cls}" id="${esc(p.id)}" style="--c:${esc(p.color)}"${isFrom ? ' aria-current="true"' : ""}>
+      ${icon(p)}<div>${head}<p class="tag">${esc(p.tagline)}</p>${links}</div></li>`;
+  };
+
+  const labels = window.SH1FTW_GROUP_LABELS || {};
+  const label = (name) => labels[name] || name;
+  // One section per platform, in the order platforms first appear in projects.js.
+  const groups = [];
+  projects.forEach((p) => {
+    let g = groups.find((x) => x.name === p.platform);
+    if (!g) groups.push((g = { name: p.platform, items: [] }));
+    g.items.push(p);
+  });
+  document.getElementById("list").innerHTML = groups.map((g) =>
+    `<section aria-label="${esc(label(g.name))}"><h2>${esc(label(g.name))}</h2><ul class="list">${g.items.map(row).join("")}</ul></section>`).join("");
 
   // Latest release per project, live from GitHub (cached for the session, silent if offline or rate-limited).
   projects.filter((p) => p.repo && !p.soon).forEach(async (p) => {
@@ -115,12 +193,12 @@
     if (!ver) {
       try {
         const r = await fetch(`https://api.github.com/repos/${p.repo}/releases/latest`);
-        if (r.ok) ver = String((await r.json()).tag_name || "").replace(/^v/, "");
+        if (r.ok) ver = String((await r.json()).tag_name || "").replace(/^v/i, "");
         if (ver) try { sessionStorage.setItem(key, ver); } catch (e) {}
       } catch (e) {}
     }
     const el = document.querySelector(`[data-ver="${p.id}"]`);
-    if (ver && el) el.textContent = " · v" + ver;
+    if (ver && el) { el.textContent = ver; el.title = "Latest release"; }
   });
 })();
 </script>
