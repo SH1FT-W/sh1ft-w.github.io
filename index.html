@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SH1FT-W</title>
+<meta name="description" content="Small, careful tools for Home Assistant and the Mac. Open source.">
+<meta property="og:title" content="SH1FT-W">
+<meta property="og:description" content="Small, careful tools for Home Assistant and the Mac. Open source.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root { --bg: #f6f5f2; --ink: #151515; --muted: #6f6b64; --line: #dcd8d0; --hover: #efede8; color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #121212; --ink: #efece6; --muted: #948f87; --line: #2b2a28; --hover: #1a1a19; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --bg: #121212; --ink: #efece6; --muted: #948f87; --line: #2b2a28; --hover: #1a1a19; color-scheme: dark; }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.5 Figtree, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 72px 24px 64px; }
+  .kicker { font: 500 12.5px "JetBrains Mono", ui-monospace, monospace; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; }
+  h1 { font: 800 clamp(52px, 11vw, 80px)/1 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -.04em; margin: 14px 0 18px; }
+  .lead { color: var(--muted); font-size: 20px; max-width: 520px; margin: 0 0 52px; }
+
+  .back { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 28px; padding: 7px 14px 7px 8px; border-radius: 99px;
+    color: inherit; text-decoration: none; font-weight: 600; font-size: 15px;
+    background: color-mix(in srgb, var(--c) 14%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent); }
+  .back img { width: 24px; height: 24px; border-radius: 6px; }
+  .back:hover { background: color-mix(in srgb, var(--c) 22%, transparent); }
+
+  .row { position: relative; display: grid; grid-template-columns: 56px 1fr auto; gap: 22px; align-items: center;
+    padding: 24px 12px; margin: 0 -12px; border-top: 1px solid var(--line); border-radius: 0; transition: background .2s; }
+  .row:last-child { border-bottom: 1px solid var(--line); }
+  .row:not(.soon):hover { background: var(--hover); }
+  .row.from { background: color-mix(in srgb, var(--c) 9%, transparent); }
+  .row img { width: 56px; height: 56px; border-radius: 13px; display: block; }
+  .row h2 { font: 700 30px/1.15 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -.02em; margin: 0;
+    display: flex; flex-wrap: wrap; column-gap: 12px; row-gap: 2px; align-items: baseline; }
+  .row h2 small { font: 500 12px "JetBrains Mono", ui-monospace, monospace; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+  .row h2 small [data-ver] { text-transform: none; }
+  .row p { margin: 3px 0 0; color: var(--muted); }
+  .row a.main { color: inherit; text-decoration: none; }
+  .row a.main::after { content: ""; position: absolute; inset: 0; }
+  .row a.main:focus-visible { outline: none; }
+  .row:has(a.main:focus-visible) { outline: 2px solid var(--c); outline-offset: -2px; }
+  .row:not(.soon):hover h2 a { color: var(--c); }
+  .side { display: flex; align-items: center; gap: 18px; }
+  .gh { position: relative; z-index: 1; color: var(--muted); font-size: 14px; font-weight: 600; text-decoration: none; padding: 4px 2px; }
+  .gh:hover { color: var(--ink); }
+  .arr { font-size: 26px; color: var(--muted); transition: transform .2s, color .2s; }
+  .row:not(.soon):hover .arr { transform: translateX(6px); color: var(--c); }
+  .row.soon { opacity: .55; }
+  .tag-from { font: 600 11px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .05em; text-transform: uppercase;
+    padding: 4px 8px; border-radius: 99px; color: var(--c); background: color-mix(in srgb, var(--c) 15%, transparent); }
+
+  footer { margin-top: 56px; color: var(--muted); font-size: 14px; display: flex; gap: 20px; flex-wrap: wrap; }
+  footer a { color: inherit; }
+  footer a:hover { color: var(--ink); }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 48px 16px 48px; }
+    .lead { font-size: 18px; margin-bottom: 36px; }
+    .row { grid-template-columns: 44px 1fr; gap: 16px; padding: 20px 8px; margin: 0 -8px; align-items: start; }
+    .row img { width: 44px; height: 44px; border-radius: 11px; }
+    .row h2 { font-size: 25px; }
+    .side { grid-column: 2; }
+    .arr { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="kicker">Open source · Home Assistant · macOS</div>
+  <h1>SH1FT-W</h1>
+  <p class="lead">Small, careful tools for the smart home and the Mac.</p>
+  <div id="back"></div>
+  <div id="list"></div>
+  <footer>
+    <a href="https://github.com/SH1FT-W">github.com/SH1FT-W</a>
+  </footer>
+</main>
+<script src="projects.js"></script>
+<script>
+(function () {
+  const projects = window.SH1FTW_PROJECTS;
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const from = new URLSearchParams(location.search).get("from");
+  const origin = projects.find((p) => p.id === from && !p.soon);
+
+  if (origin) {
+    document.getElementById("back").innerHTML =
+      `<a class="back" href="${esc(origin.site)}" style="--c:${esc(origin.color)}"><img src="${esc(origin.icon)}" alt="">← Back to ${esc(origin.name)}</a>`;
+  }
+
+  document.getElementById("list").innerHTML = projects.map((p) => {
+    const meta = `${esc(p.platform)}<span data-ver="${esc(p.id)}">${p.soon ? " · coming soon" : ""}</span>`;
+    const title = p.soon ? esc(p.name) : `<a class="main" href="${esc(p.site)}">${esc(p.name)}</a>`;
+    const side = p.soon ? "" :
+      `<div class="side"><a class="gh" href="https://github.com/${esc(p.repo)}">GitHub</a><span class="arr" aria-hidden="true">→</span></div>`;
+    return `<article class="row${p.soon ? " soon" : ""}${origin && origin.id === p.id ? " from" : ""}" id="${esc(p.id)}" style="--c:${esc(p.color)}">
+      <img src="${esc(p.icon)}" alt="">
+      <div><h2>${title}<small>${meta}</small>${origin && origin.id === p.id ? '<span class="tag-from">You came from here</span>' : ""}</h2>
+      <p>${esc(p.tagline)}</p></div>${side}</article>`;
+  }).join("");
+
+  // Latest release per project, live from GitHub (cached for the session, silent if offline or rate-limited).
+  projects.filter((p) => p.repo && !p.soon).forEach(async (p) => {
+    const key = "sh1ftw-ver-" + p.id;
+    let ver = null;
+    try { ver = sessionStorage.getItem(key); } catch (e) {}
+    if (!ver) {
+      try {
+        const r = await fetch(`https://api.github.com/repos/${p.repo}/releases/latest`);
+        if (r.ok) ver = String((await r.json()).tag_name || "").replace(/^v/, "");
+        if (ver) try { sessionStorage.setItem(key, ver); } catch (e) {}
+      } catch (e) {}
+    }
+    const el = document.querySelector(`[data-ver="${p.id}"]`);
+    if (ver && el) el.textContent = " · v" + ver;
+  });
+})();
+</script>
+</body>
+</html>
