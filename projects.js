@@ -28,7 +28,8 @@ window.SH1FTW_PROJECTS = [
     tagline: "Your Claude Code agents in the macOS menu bar, with a tiny animated office.",
   },
   {
-    id: "sharemount", name: "ShareMount", platform: "macOS", soon: true, icon: "icons/sharemount.png", iconStyle: "mac", color: "#5b8def",
+    id: "sharemount", name: "ShareMount", platform: "macOS", repo: "SH1FT-W/sharemount",
+    site: "https://sh1ft-w.github.io/sharemount/", icon: "icons/sharemount.png", iconStyle: "mac", color: "#5b8def",
     tagline: "Network shares that reconnect by themselves, right from the menu bar.",
   },
   {
