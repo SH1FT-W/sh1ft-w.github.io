@@ -17,7 +17,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Automationen und Skripte als Ablauf sehen und bearbeiten, gespeichert als ganz normales Home-Assistant-YAML.",
   },
   {
-    id: "pulse", name: "Pulse", platform: "Home Assistant", soon: true, icon: "icons/pulse.svg", color: "#a78bfa",
+    id: "pulse", name: "Pulse", platform: "Home Assistant", repo: "SH1FT-W/pulse",
+    site: "https://sh1ft-w.github.io/pulse/", icon: "icons/pulse.svg", color: "#a78bfa",
     tagline: "Notices when battery sensors in Home Assistant go quiet, without polling them.",
     tagline_de: "Merkt, wenn Batteriesensoren in Home Assistant verstummen, ohne sie abzufragen.",
   },
