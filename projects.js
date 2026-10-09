@@ -44,6 +44,11 @@ window.SH1FTW_PROJECTS = [
     tagline: "An AI agent in your menu bar that answers GitHub issues and prepares tested fixes for you to approve.",
     tagline_de: "Ein KI-Agent in deiner Menüleiste, der GitHub-Issues beantwortet und getestete Fixes zum Freigeben vorbereitet.",
   },
+  {
+    id: "threadbar", name: "ThreadBar", platform: "macOS", soon: true, icon: "icons/threadbar.png", iconStyle: "mac", color: "#14a3b0",
+    tagline: "Watches your threads in the Home Assistant forum and on Reddit, and drafts replies for you to approve.",
+    tagline_de: "Behält deine Themen im Home-Assistant-Forum und auf Reddit im Blick und schreibt Antworten vor, die du nur noch freigibst.",
+  },
 ];
 
 // Optional display names for the start page's section headings (platform value -> heading).
