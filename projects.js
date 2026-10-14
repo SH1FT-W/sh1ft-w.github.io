@@ -2,7 +2,7 @@
 // New project: add one entry here (icon into icons/), every page picks it up automatically.
 // Projects are grouped by `platform`, in the order the platforms first appear.
 // iconStyle: omit for a full-bleed square icon; "mac" for a macOS icon with its built-in margin;
-// "glyph" for a transparent mark that gets a neutral tile behind it; "glyph light" keeps that tile white in dark mode (dark marks).
+// "glyph" for a transparent mark that gets a neutral tile behind it; "glyph light" keeps that tile white in dark mode (dark marks); "glyph grey" tints it for white marks.
 window.SH1FTW_PROJECTS = [
   {
     id: "casora", name: "Casora", platform: "Home Assistant", repo: "SH1FT-W/casora",
@@ -46,6 +46,16 @@ window.SH1FTW_PROJECTS = [
     id: "unifi-network-plus", name: "UniFi Network Plus", platform: "Home Assistant", soon: true, icon: "icons/unifi-network-plus.png", color: "#006fff",
     tagline: "Adds what the UniFi Network app shows and Home Assistant doesn't: throughput, clients, internet quality and speed tests.",
     tagline_de: "Ergänzt, was die UniFi-Network-App zeigt und Home Assistant nicht: Durchsatz, Clients, Internetqualität und Speedtest.",
+  },
+  {
+    id: "unas", name: "UniFi UNAS", platform: "Home Assistant", soon: true, icon: "icons/unas.png", iconStyle: "glyph grey", color: "#006fff",
+    tagline: "UniFi NAS in Home Assistant: storage, drives, data scrubs and health, locally through UniFi OS and UniFi Drive.",
+    tagline_de: "UniFi-NAS in Home Assistant: Speicher, Laufwerke, Datenprüfung und Zustand, lokal über UniFi OS und UniFi Drive.",
+  },
+  {
+    id: "ring-plus", name: "Ring Plus", platform: "Home Assistant", soon: true, icon: "icons/ring-plus.png", iconStyle: "glyph", color: "#1998d5",
+    tagline: "Extra controls for the Ring Intercom, added to the official Ring integration: door opener, Ring-to-Open, unlock duration, restart.",
+    tagline_de: "Zusatzfunktionen für die Ring Intercom neben der offiziellen Ring-Integration: Türöffner, Ring-to-Open, Öffnungsdauer, Neustart.",
   },
   {
     id: "chihiros", name: "Chihiros", platform: "Home Assistant", soon: true, icon: "icons/chihiros.png", color: "#e60012",
