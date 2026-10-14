@@ -24,8 +24,8 @@ window.SH1FTW_PROJECTS = [
   },
   {
     id: "evenlight", name: "Evenlight", platform: "Home Assistant", soon: true, icon: "icons/evenlight.png", iconStyle: "glyph", color: "#E8A33D",
-    tagline: "Every lamp, one light: mixed brands in the same warm white, following the sun.",
-    tagline_de: "Jede Lampe, ein Licht: verschiedene Marken im selben warmen Weiß, das dem Lauf der Sonne folgt.",
+    tagline: "Adaptive lighting done right: follows the sun, gets the most out of every lamp, wakes you with a sunrise and leaves alone what you set by hand.",
+    tagline_de: "Adaptives Licht, richtig gemacht: folgt der Sonne, holt aus jeder Lampe das Beste heraus, weckt dich mit einem Sonnenaufgang und lässt in Ruhe, was du selbst einstellst.",
   },
   {
     id: "agentbar", name: "AgentBar", platform: "macOS", repo: "SH1FT-W/agentbar",
@@ -41,13 +41,13 @@ window.SH1FTW_PROJECTS = [
   },
   {
     id: "issuebar", name: "IssueBar", platform: "macOS", soon: true, icon: "icons/issuebar.png", iconStyle: "mac", color: "#6366f1",
-    tagline: "An AI agent in your menu bar that answers GitHub issues and prepares tested fixes for you to approve.",
-    tagline_de: "Ein KI-Agent in deiner Menüleiste, der GitHub-Issues beantwortet und getestete Fixes zum Freigeben vorbereitet.",
+    tagline: "Suggests replies to your GitHub issues and prepares tested fixes, right from the menu bar. Nothing goes out until you approve it.",
+    tagline_de: "Schlägt Antworten auf deine GitHub-Issues vor und bereitet getestete Fixes vor, direkt aus der Menüleiste. Raus geht erst etwas, wenn du es freigibst.",
   },
   {
     id: "threadbar", name: "ThreadBar", platform: "macOS", soon: true, icon: "icons/threadbar.png", iconStyle: "mac", color: "#14a3b0",
-    tagline: "Watches your threads in the Home Assistant forum and on Reddit, and drafts replies for you to approve.",
-    tagline_de: "Behält deine Themen im Home-Assistant-Forum und auf Reddit im Blick und schreibt Antworten vor, die du nur noch freigibst.",
+    tagline: "Watches your threads in the Home Assistant forum and on Reddit and suggests replies. Nothing is posted until you approve it.",
+    tagline_de: "Behält deine Themen im Home-Assistant-Forum und auf Reddit im Blick und schlägt Antworten vor. Gepostet wird erst, wenn du freigibst.",
   },
 ];
 
