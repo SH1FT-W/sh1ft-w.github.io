@@ -20,7 +20,8 @@
     document.body.prepend(host);
     const root = host.attachShadow({ mode: "open" });
     const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-    const items = projects.map((p) => {
+    // Only released projects (plus the current page, should it still be marked soon); upcoming ones live on the start page.
+    const items = projects.filter((p) => !p.soon || p.id === current).map((p) => {
       const on = p.id === current;
       const href = on ? "#" : p.site || base + "#" + p.id;
       const label = p.name + (p.soon ? " (" + soonText() + ")" : "");

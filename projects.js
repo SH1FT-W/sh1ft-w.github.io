@@ -2,7 +2,7 @@
 // New project: add one entry here (icon into icons/), every page picks it up automatically.
 // Projects are grouped by `platform`, in the order the platforms first appear.
 // iconStyle: omit for a full-bleed square icon; "mac" for a macOS icon with its built-in margin;
-// "glyph" for a transparent mark that gets a neutral tile behind it.
+// "glyph" for a transparent mark that gets a neutral tile behind it; "glyph light" keeps that tile white in dark mode (dark marks).
 window.SH1FTW_PROJECTS = [
   {
     id: "casora", name: "Casora", platform: "Home Assistant", repo: "SH1FT-W/casora",
@@ -26,6 +26,26 @@ window.SH1FTW_PROJECTS = [
     id: "evenlight", name: "Evenlight", platform: "Home Assistant", soon: true, icon: "icons/evenlight.png", iconStyle: "glyph", color: "#E8A33D",
     tagline: "Adaptive lighting done right: follows the sun, gets the most out of every lamp, wakes you with a sunrise and leaves alone what you set by hand.",
     tagline_de: "Adaptives Licht, richtig gemacht: folgt der Sonne, holt aus jeder Lampe das Beste heraus, weckt dich mit einem Sonnenaufgang und lässt in Ruhe, was du selbst einstellst.",
+  },
+  {
+    id: "jbl-bar", name: "JBL Bar", platform: "Home Assistant", soon: true, icon: "icons/jbl-bar.png", iconStyle: "glyph light", color: "#ff6a00",
+    tagline: "JBL soundbars with JBL One, fully local in Home Assistant: fast, complete, no cloud.",
+    tagline_de: "JBL-Soundbars mit JBL One komplett lokal in Home Assistant: schnell, vollständig, ohne Cloud.",
+  },
+  {
+    id: "reolink-proxy", name: "Reolink Proxy", platform: "Home Assistant", soon: true, icon: "icons/reolink-proxy.png", color: "#1a5cf5",
+    tagline: "Live video for Reolink cameras that have no stream of their own, attached right to the Reolink device.",
+    tagline_de: "Live-Bild für Reolink-Kameras ohne eigenen Stream, direkt am Gerät der Reolink-Integration.",
+  },
+  {
+    id: "ps5", name: "PS5", platform: "Home Assistant", soon: true, icon: "icons/ps5.png", color: "#0070d1",
+    tagline: "Your PlayStation 5 in Home Assistant: status, wake and rest mode, fully local without cloud or MQTT.",
+    tagline_de: "Deine PlayStation 5 in Home Assistant: Status, Aufwecken und Ruhemodus, komplett lokal ohne Cloud oder MQTT.",
+  },
+  {
+    id: "unifi-network-plus", name: "UniFi Network Plus", platform: "Home Assistant", soon: true, icon: "icons/unifi-network-plus.png", color: "#006fff",
+    tagline: "Adds what the UniFi Network app shows and Home Assistant doesn't: throughput, clients, internet quality and speed tests.",
+    tagline_de: "Ergänzt, was die UniFi-Network-App zeigt und Home Assistant nicht: Durchsatz, Clients, Internetqualität und Speedtest.",
   },
   {
     id: "agentbar", name: "AgentBar", platform: "macOS", repo: "SH1FT-W/agentbar",
