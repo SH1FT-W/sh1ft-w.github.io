@@ -48,6 +48,21 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Ergänzt, was die UniFi-Network-App zeigt und Home Assistant nicht: Durchsatz, Clients, Internetqualität und Speedtest.",
   },
   {
+    id: "chihiros", name: "Chihiros", platform: "Home Assistant", soon: true, icon: "icons/chihiros.png", color: "#e60012",
+    tagline: "Chihiros C II RGB lights and dosing pumps in Home Assistant, stable over Bluetooth proxies, no app needed.",
+    tagline_de: "Chihiros C II RGB und Dosierpumpe in Home Assistant, stabil über Bluetooth-Proxys, ohne App.",
+  },
+  {
+    id: "fluval", name: "Fluval", platform: "Home Assistant", soon: true, icon: "icons/fluval.png", iconStyle: "glyph light", color: "#0a8fd0",
+    tagline: "The Fluval Reef Nano 4.0 LED in Home Assistant over Bluetooth, robust and without surprises.",
+    tagline_de: "Die Fluval Reef Nano 4.0 LED in Home Assistant über Bluetooth, robust und ohne Überraschungen.",
+  },
+  {
+    id: "helialux", name: "HeliaLux", platform: "Home Assistant", soon: true, icon: "icons/helialux.png", iconStyle: "glyph light", color: "#003a5d",
+    tagline: "The Juwel HeliaLux SmartControl in Home Assistant, local, robust and without surprises.",
+    tagline_de: "Die Juwel HeliaLux SmartControl in Home Assistant, lokal, robust und ohne Überraschungen.",
+  },
+  {
     id: "agentbar", name: "AgentBar", platform: "macOS", repo: "SH1FT-W/agentbar",
     site: "https://sh1ft-w.github.io/agentbar/", icon: "icons/agentbar.png", iconStyle: "mac", color: "#2997ff",
     tagline: "Your Claude Code agents in the macOS menu bar, with a tiny animated office.",
