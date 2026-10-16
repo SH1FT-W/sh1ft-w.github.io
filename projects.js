@@ -84,16 +84,6 @@ window.SH1FTW_PROJECTS = [
     tagline: "Network shares that reconnect by themselves, right from the menu bar.",
     tagline_de: "Netzwerkfreigaben, die sich von selbst wieder verbinden, direkt aus der Menüleiste.",
   },
-  {
-    id: "issuebar", name: "IssueBar", platform: "macOS", soon: true, icon: "icons/issuebar.png", iconStyle: "mac", color: "#6366f1",
-    tagline: "Suggests replies to your GitHub issues and prepares tested fixes, right from the menu bar. Nothing goes out until you approve it.",
-    tagline_de: "Schlägt Antworten auf deine GitHub-Issues vor und bereitet getestete Fixes vor, direkt aus der Menüleiste. Raus geht erst etwas, wenn du es freigibst.",
-  },
-  {
-    id: "threadbar", name: "ThreadBar", platform: "macOS", soon: true, icon: "icons/threadbar.png", iconStyle: "mac", color: "#14a3b0",
-    tagline: "Watches your threads in the Home Assistant forum and on Reddit and suggests replies. Nothing is posted until you approve it.",
-    tagline_de: "Behält deine Themen im Home-Assistant-Forum und auf Reddit im Blick und schlägt Antworten vor. Gepostet wird erst, wenn du freigibst.",
-  },
 ];
 
 // Optional display names for the start page's section headings (platform value -> heading).
