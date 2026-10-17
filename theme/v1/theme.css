@@ -22,7 +22,9 @@
  *   class="reveal" (+ d1, d2, d3 for a delay)  fades in when scrolled into view; ?still shows everything at once
  *
  * WHAT A PAGE MAY OVERRIDE (CSS custom properties on :root, light and dark):
- *   --accent, --accent-ink, --on-accent    the project colour (links, focus ring, eyebrow dot)
+ *   --accent, --accent-ink, --on-accent    the project colour (links, focus ring, eyebrow dot);
+ *                                          set once on :root, the theme does not override it in dark mode
+ *                                          (define your own dark value if the colour needs one)
  *   --bg, --bg-2, --card, --card-2         surfaces
  *   --ink, --ink-2, --ink-3                text, from strong to faint
  *   --line, --chip                         hairlines and soft fills
@@ -55,7 +57,6 @@
     --bg: #0b0b0d; --bg-2: #121214; --card: #1c1c1e; --card-2: #232326;
     --ink: #f5f5f7; --ink-2: #a1a1a6; --ink-3: #6e6e73;
     --line: rgba(255,255,255,0.09); --chip: rgba(255,255,255,0.09);
-    --accent: #2997ff; --accent-ink: #2997ff; --on-accent: #ffffff;
     --glass: rgba(28,28,30,0.62); --glass-line: rgba(255,255,255,0.08);
     --shadow: 0 14px 34px -16px rgba(0,0,0,0.6); --shadow-lg: 0 40px 90px -36px rgba(0,0,0,0.8);
   }
@@ -65,7 +66,6 @@
   --bg: #0b0b0d; --bg-2: #121214; --card: #1c1c1e; --card-2: #232326;
   --ink: #f5f5f7; --ink-2: #a1a1a6; --ink-3: #6e6e73;
   --line: rgba(255,255,255,0.09); --chip: rgba(255,255,255,0.09);
-  --accent: #2997ff; --accent-ink: #2997ff; --on-accent: #ffffff;
   --glass: rgba(28,28,30,0.62); --glass-line: rgba(255,255,255,0.08);
   --shadow: 0 14px 34px -16px rgba(0,0,0,0.6); --shadow-lg: 0 40px 90px -36px rgba(0,0,0,0.8);
 }
