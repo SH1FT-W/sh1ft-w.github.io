@@ -33,9 +33,14 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "JBL-Soundbars mit JBL One komplett lokal in Home Assistant: schnell, vollständig, ohne Cloud.",
   },
   {
-    id: "reolink-proxy", name: "Reolink Proxy", platform: "Home Assistant", soon: true, icon: "icons/reolink-proxy.png", color: "#1a5cf5",
-    tagline: "Live video for Reolink cameras that have no stream of their own, attached right to the Reolink device.",
-    tagline_de: "Live-Bild für Reolink-Kameras ohne eigenen Stream, direkt am Gerät der Reolink-Integration.",
+    id: "reolink-plus", name: "Reolink Plus", platform: "Home Assistant", soon: true, icon: "icons/reolink-plus.png", color: "#1a5cf5",
+    tagline: "Live video for Reolink cameras that have no stream of their own, attached right to the Reolink device, with the proxy app controlled from Home Assistant.",
+    tagline_de: "Live-Bild für Reolink-Kameras ohne eigenen Stream, direkt am Gerät der Reolink-Integration, mit der Proxy-App gesteuert aus Home Assistant.",
+  },
+  {
+    id: "pflanzenmonitor-plus", name: "Pflanzenmonitor Plus", platform: "Home Assistant", soon: true, icon: "icons/pflanzenmonitor-plus.png", iconStyle: "glyph", color: "#4caf50",
+    tagline: "Companion to Plant Monitor: learns each plant's watering cycle, predicts the next watering and suggests thresholds with AI, approved by you.",
+    tagline_de: "Begleiter zum Plant Monitor: lernt den Gießzyklus jeder Pflanze, sagt das nächste Gießen voraus und schlägt Grenzwerte per KI vor, freigegeben von dir.",
   },
   {
     id: "ps5", name: "PS5", platform: "Home Assistant", soon: true, icon: "icons/ps5.png", color: "#0070d1",
