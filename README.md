@@ -18,7 +18,7 @@ To add a project: put its icon into `icons/`, add an entry to `projects.js`, and
 
 ## Shared design ("Gemeinsames Design")
 
-The start page and the project pages (AgentBar, Evenlight, Pulse, ShareMount, FLODE; Casora still to follow) share one
+The start page and the project pages (AgentBar, Casora, Evenlight, Pulse, ShareMount, FLODE) share one
 versioned stylesheet and script from this repository:
 
 ```html
