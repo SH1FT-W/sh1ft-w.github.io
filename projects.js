@@ -78,6 +78,11 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Die Juwel HeliaLux SmartControl in Home Assistant, lokal, robust und ohne Überraschungen.",
   },
   {
+    id: "delonghi", name: "De'Longhi", platform: "Home Assistant", soon: true, icon: "icons/delonghi.png", color: "#94623F",
+    tagline: "Your De'Longhi coffee machine in Home Assistant with just a smart plug: learns every program, counts every cup, knows when it needs care.",
+    tagline_de: "Dein De'Longhi-Kaffeevollautomat in Home Assistant, nur mit einer Steckdose: lernt jedes Programm, zählt jede Tasse, weiß, wann Pflege fällig ist.",
+  },
+  {
     id: "agentbar", name: "AgentBar", platform: "macOS", repo: "SH1FT-W/agentbar",
     site: "https://sh1ft-w.github.io/agentbar/", icon: "icons/agentbar.png", iconStyle: "mac", color: "#2997ff",
     tagline: "Your Claude Code agents in the macOS menu bar, with a tiny animated office.",
