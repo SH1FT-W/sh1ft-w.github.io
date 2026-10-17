@@ -18,87 +18,38 @@
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<!-- System fonts only (San Francisco, Segoe UI, Roboto, ...): no web font download, no third party request. -->
-<script>
-  // Sprache: gespeicherte Wahl (gilt für alle SH1FT-W-Seiten dieser Origin), sonst die erste Browsersprache.
-  // Hell/Dunkel: gespeicherte Wahl (sh1ftw-theme) oder ?theme=dark|light, sonst das System.
-  (function () {
-    var saved = null, theme = null;
-    try { saved = localStorage.getItem("sh1ftw-lang"); theme = localStorage.getItem("sh1ftw-theme"); } catch (e) {}
-    var pref = saved || ((navigator.languages && navigator.languages[0]) || navigator.language || "en");
-    document.documentElement.lang = /^de/i.test(pref) ? "de" : "en";
-    var m = /[?&]theme=(dark|light)\b/.exec(location.search); if (m) theme = m[1];
-    if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);
-    if (/[?&]still\b/.test(location.search)) document.documentElement.classList.add("still");
-  })();
-</script>
+<!-- Shared SH1FT-W design (tokens, glass navigation, light/dark, DE/EN, reveal): theme/v1 in this repository. System fonts only, no third party request. -->
+<link rel="stylesheet" href="https://sh1ft-w.github.io/theme/v1/theme.css">
+<script src="https://sh1ft-w.github.io/theme/v1/theme.js"></script>
 <style>
+  /* Page-specific tokens on top of theme.css: the start page is a little more compact (1060 px, 54 px navigation) */
   :root {
-    --bg: #f5f5f7; --bg-2: #ececf0; --ink: #1d1d1f; --ink-2: #6e6e73; --ink-3: #8e8e93; --line: rgba(0,0,0,.08);
-    --tile: #fff; --tile-ring: rgba(0,0,0,.07); --link: #0066cc; --pill: rgba(0,0,0,.05);
-    --glass: rgba(255,255,255,.66); --glass-line: rgba(255,255,255,.7);
-    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 12px 32px -14px rgba(0,0,0,.14);
-    --shadow-lg: 0 2px 6px rgba(0,0,0,.04), 0 40px 90px -36px rgba(0,0,0,.28);
+    --max: 1060px; --nav-h: 54px; --nav-gap: 14px; --nav-pad: 0 10px 0 18px;
+    --tile: var(--card); --tile-ring: rgba(0,0,0,.07); --link: var(--accent); --pill: var(--chip);
     --blob-1: rgba(41,151,255,.18); --blob-2: rgba(255,106,0,.12); --blob-3: rgba(167,139,250,.16);
-    --mix: #1d1d1f; color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0b0b0d; --bg-2: #121214; --ink: #f5f5f7; --ink-2: #a1a1a6; --ink-3: #6e6e73; --line: rgba(255,255,255,.09);
-      --tile: #1c1c1e; --tile-ring: rgba(255,255,255,.09); --link: #2997ff; --pill: rgba(255,255,255,.09);
-      --glass: rgba(28,28,30,.62); --glass-line: rgba(255,255,255,.08);
-      --shadow: 0 14px 34px -16px rgba(0,0,0,.6); --shadow-lg: 0 40px 90px -36px rgba(0,0,0,.8);
-      --blob-1: rgba(41,151,255,.16); --blob-2: rgba(255,106,0,.1); --blob-3: rgba(167,139,250,.14);
-      --mix: #f5f5f7; color-scheme: dark;
-    }
+    :root:not([data-theme="light"]) { --tile-ring: rgba(255,255,255,.09); --blob-1: rgba(41,151,255,.16); --blob-2: rgba(255,106,0,.1); --blob-3: rgba(167,139,250,.14); }
   }
-  :root[data-theme="dark"] {
-    --bg: #0b0b0d; --bg-2: #121214; --ink: #f5f5f7; --ink-2: #a1a1a6; --ink-3: #6e6e73; --line: rgba(255,255,255,.09);
-    --tile: #1c1c1e; --tile-ring: rgba(255,255,255,.09); --link: #2997ff; --pill: rgba(255,255,255,.09);
-    --glass: rgba(28,28,30,.62); --glass-line: rgba(255,255,255,.08);
-    --shadow: 0 14px 34px -16px rgba(0,0,0,.6); --shadow-lg: 0 40px 90px -36px rgba(0,0,0,.8);
-    --blob-1: rgba(41,151,255,.16); --blob-2: rgba(255,106,0,.1); --blob-3: rgba(167,139,250,.14);
-    --mix: #f5f5f7; color-scheme: dark;
-  }
+  :root[data-theme="dark"] { --tile-ring: rgba(255,255,255,.09); --blob-1: rgba(41,151,255,.16); --blob-2: rgba(255,106,0,.1); --blob-3: rgba(167,139,250,.14); }
 
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 90px; }
-  body { margin: 0; background: var(--bg); color: var(--ink); overflow-x: hidden;
-    font: 17px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif;
-    letter-spacing: -.022em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { font: 17px/1.47 var(--font); letter-spacing: -.022em; }
   a { color: inherit; }
-  .wrap { position: relative; max-width: 1060px; margin: 0 auto; padding: 0 max(24px, env(safe-area-inset-right)) 0 max(24px, env(safe-area-inset-left)); }
-  :focus-visible { outline: 3px solid color-mix(in srgb, var(--link) 60%, transparent); outline-offset: 2px; border-radius: 8px; }
+  .wrap { position: relative; max-width: var(--max); margin: 0 auto; padding: 0 max(24px, env(safe-area-inset-right)) 0 max(24px, env(safe-area-inset-left)); }
 
-  /* Schwebende Glas-Navigation */
-  .navwrap { position: sticky; top: 12px; z-index: 10; padding: 0 max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left)); pointer-events: none; }
-  .nav { pointer-events: auto; max-width: 1060px; margin: 0 auto; height: 54px; padding: 0 10px 0 18px; display: flex; align-items: center; gap: 14px;
-    border-radius: 99px; background: var(--glass); -webkit-backdrop-filter: saturate(180%) blur(22px); backdrop-filter: saturate(180%) blur(22px);
-    box-shadow: inset 0 0 0 1px var(--glass-line), var(--shadow); }
-  .brand { font-weight: 700; font-size: 16px; letter-spacing: .01em; text-decoration: none; }
-  .nav-links { display: flex; gap: 2px; margin-left: auto; font-size: 14px; font-weight: 500; }
-  .nav-links a { color: var(--ink-2); text-decoration: none; padding: 7px 12px; border-radius: 99px; transition: background .2s, color .2s; }
-  .nav-links a:hover { color: var(--ink); background: var(--pill); }
-  .iconbtn { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 0; background: none; color: var(--ink-2); cursor: pointer; display: grid; place-items: center; transition: background .2s, color .2s; }
-  .iconbtn:hover { background: var(--pill); color: var(--ink); }
-  .iconbtn svg { width: 18px; height: 18px; }
-  .iconbtn .sun { display: none; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .iconbtn .moon { display: none; } :root:not([data-theme="light"]) .iconbtn .sun { display: block; } }
-  :root[data-theme="dark"] .iconbtn .moon { display: none; } :root[data-theme="dark"] .iconbtn .sun { display: block; }
-  :root[data-theme="light"] .iconbtn .moon { display: block; } :root[data-theme="light"] .iconbtn .sun { display: none; }
-  .lang { flex: none; display: inline-flex; border-radius: 99px; background: var(--pill); padding: 2px; }
-  .lang button { font: inherit; font-size: 12px; font-weight: 500; letter-spacing: 0; border: 0; background: none; color: var(--ink-2);
-    padding: 4px 10px; border-radius: 99px; cursor: pointer; transition: color .2s, background .2s; }
+  /* Glas-Navigation aus theme.css, hier nur die kompakteren Maße der Startseite und der Sprachschalter im Segment-Stil des Filters */
+  .navwrap { padding: 0 max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left)); }
+  .brand { font-size: 16px; letter-spacing: .01em; }
+  .nav-links { gap: 2px; }
+  .nav-links a { padding: 7px 12px; }
+  .iconbtn { width: 34px; height: 34px; }
+  .lang { border: 0; overflow: visible; background: var(--pill); padding: 2px; }
+  .lang button { font-weight: 500; letter-spacing: 0; padding: 4px 10px; border-radius: 99px; transition: color .2s, background .2s; }
   .lang button:hover { color: var(--ink); }
   .lang button.on { background: var(--tile); color: var(--ink); box-shadow: 0 0 0 .5px var(--tile-ring), 0 1px 2px rgba(0,0,0,.06); }
   .btn { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 16px; border-radius: 99px; background: var(--ink); color: var(--bg);
     font-size: 14px; font-weight: 600; text-decoration: none; letter-spacing: -.01em; transition: transform .2s, opacity .2s; white-space: nowrap; }
   .btn:hover { transform: translateY(-1px); opacity: .9; }
-
-  /* Einblenden beim Scrollen (?still schaltet es ab, z. B. für Bildschirmfotos) */
-  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1); }
-  .reveal.in, html.still .reveal { opacity: 1; transform: none; }
-  html.still .reveal { transition: none; }
 
   /* Kopf mit weichem Farbschleier */
   header.hero { position: relative; padding: clamp(56px, 9vw, 112px) 0 clamp(36px, 5vw, 56px); text-align: center; }
@@ -153,7 +104,7 @@
   /* Symbol-Kachel: jedes Symbol wird dasselbe abgerundete Quadrat, egal wie viel Rand die Datei hat. */
   .ic { --s: 56px; position: relative; flex: none; display: block; width: var(--s); height: var(--s);
     border-radius: calc(var(--s) * .2237); overflow: hidden; isolation: isolate; }
-  .ic img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .ic img { position: absolute; inset: 0; width: 100%; max-width: none; height: 100%; display: block; }
   .ic.mac img { inset: -12.15%; width: 124.3%; height: 124.3%; }
   .ic.glyph { background: var(--tile); }
   .ic.glyph.light { background: #fff; }
@@ -207,9 +158,6 @@
   .value b { display: block; font-size: 17px; font-weight: 700; letter-spacing: -.018em; margin-bottom: 6px; }
   .value p { margin: 0; color: var(--ink-2); font-size: 15px; line-height: 1.45; }
 
-  /* Zweisprachig: statische Texte stehen doppelt, die Seitensprache blendet die andere aus */
-  html[lang="de"] .en, html[lang="en"] .de { display: none !important; }
-
   footer { margin-top: 72px; padding: 28px 0 56px; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 13px; letter-spacing: -.005em;
     display: flex; flex-wrap: wrap; gap: 8px 24px; }
   footer a { text-decoration: none; font-weight: 500; }
@@ -235,7 +183,7 @@
     .filter::-webkit-scrollbar { display: none; }
   }
   @media (max-width: 360px) { .wrap { padding-left: 16px; padding-right: 16px; } }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } .card:has(.site:hover), .shelf a:hover .ic { transform: none; } .reveal { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
+  @media (prefers-reduced-motion: reduce) { .card:has(.site:hover), .shelf a:hover .ic { transform: none; } }
 </style>
 </head>
 <body>
@@ -323,26 +271,9 @@
   let filter = "";
   try { filter = origin ? "" : localStorage.getItem("sh1ftw-filter") || ""; } catch (e) {}
   if (!groups.some((g) => g.name === filter)) filter = "";
-  let io = null;
-  function watchReveal() {
-    const els = document.querySelectorAll(".reveal:not(.in)");
-    if (!("IntersectionObserver" in window) || document.documentElement.classList.contains("still") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      els.forEach((e) => e.classList.add("in")); return;
-    }
-    io = io || new IntersectionObserver((entries) => {
-      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
-    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 });
-    els.forEach((e) => io.observe(e));
-  }
   function render(l) {
     lang = l; t = T[l];
-    document.documentElement.lang = l;
     document.querySelector('meta[name="description"]').content = t.desc;
-    document.querySelectorAll(".lang button").forEach((b) => {
-      const on = b.dataset.l === l;
-      b.classList.toggle("on", on);
-      b.setAttribute("aria-pressed", on ? "true" : "false");
-    });
     const live = projects.filter((p) => !p.soon), soon = projects.filter((p) => p.soon);
     document.getElementById("stats").innerHTML =
       `<span class="stat"><b>${live.length}</b> ${t.released}</span><span class="stat"><b>${soon.length}</b> ${t.coming}</span>`;
@@ -370,27 +301,15 @@
       render(lang);
     }));
     Object.keys(versions).forEach(showVer);
-    watchReveal();
+    window.SH1FTW.reveal();
   }
   function showVer(id) {
     const el = document.querySelector(`[data-ver="${id}"]`);
     if (el) { el.textContent = versions[id]; el.title = t.latest; }
   }
-  render(document.documentElement.lang === "de" ? "de" : "en");
-  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => {
-    try { localStorage.setItem("sh1ftw-lang", b.dataset.l); } catch (e) {}
-    render(b.dataset.l);
-  }));
-
-  // Hell/Dunkel: folgt dem System, der Schalter überstimmt es und merkt sich die Wahl (gleicher Key auf allen Projektseiten).
-  const mq = window.matchMedia("(prefers-color-scheme: dark)");
-  document.getElementById("theme").addEventListener("click", () => {
-    const cur = document.documentElement.getAttribute("data-theme");
-    const eff = cur === "dark" || cur === "light" ? cur : (mq.matches ? "dark" : "light");
-    const next = eff === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    try { localStorage.setItem("sh1ftw-theme", next); } catch (e) {}
-  });
+  // Sprache und Hell/Dunkel macht theme.js (Schalter, Speicherung, lang-Attribut); hier nur neu zeichnen, wenn die Sprache wechselt.
+  render(window.SH1FTW.lang());
+  document.addEventListener("sh1ftw-lang", () => { if (window.SH1FTW.lang() !== lang) render(window.SH1FTW.lang()); });
 
   // Neueste Version je Projekt, live von GitHub (für die Sitzung gemerkt, still bei Offline oder API-Limit).
   projects.filter((p) => p.repo && !p.soon).forEach(async (p) => {

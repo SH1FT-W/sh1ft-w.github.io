@@ -18,8 +18,43 @@ To add a project: put its icon into `icons/`, add an entry to `projects.js`, and
 
 ## Shared design ("Gemeinsames Design")
 
-The seven project pages (AgentBar, Evenlight, Pulse, ShareMount, FLODE, Casora and this start page) each keep
-their own copy of the floating glass navigation, the light/dark switch and the language toggle. A change therefore
-has to be made seven times. A shared, versioned `theme.css` / `theme.js` served from this repository (next to
-`bar.js`) is planned so that every page loads the same navigation and tokens; until then, keep the copies in sync by
-hand when one of them changes. Nothing is built here yet; this section only records the plan.
+The start page and the project pages (AgentBar, Evenlight, Pulse, ShareMount, FLODE; Casora still to follow) share one
+versioned stylesheet and script from this repository:
+
+```html
+<link rel="stylesheet" href="https://sh1ft-w.github.io/theme/v1/theme.css">
+<script src="https://sh1ft-w.github.io/theme/v1/theme.js"></script>
+```
+
+Put both in `<head>` **before** the page's own `<style>`; the script is loaded synchronously on purpose so language and
+colour scheme are set before the first paint. The path is versioned: a breaking change becomes `theme/v2/` next to it and
+`v1` stays untouched, so no page breaks when another one moves on.
+
+**What `theme.css` provides**
+
+- Colour tokens for light and dark (`:root`, `@media (prefers-color-scheme: dark)` with `:root:not([data-theme="light"])`,
+  and `:root[data-theme="dark"]`): `--bg`, `--bg-2`, `--card`, `--card-2`, `--ink`, `--ink-2`, `--ink-3`, `--line`, `--chip`,
+  `--accent`, `--accent-ink`, `--on-accent`, `--glass`, `--glass-line`, `--shadow`, `--shadow-lg`.
+- Layout and type tokens: `--radius`, `--radius-lg`, `--gutter`, `--max`, `--font`, `--font-display`, `--mono` (system font
+  stacks, no web fonts), navigation geometry `--nav-top`, `--nav-h`, `--nav-gap`, `--nav-pad`.
+- The floating glass navigation (`.navwrap > .nav`, `.brand`, `.nav-links`, `.nav-links a.opt` hidden below 960 px), the
+  light/dark button (`.iconbtn` with `.moon` and `.sun`), the DE/EN switch (`.lang button[data-l]`, `.on`), the bilingual
+  rule (`html[lang="de"] .en` and `html[lang="en"] .de` are hidden), `.reveal` (+ `.d1`, `.d2`, `.d3`) for reveal on scroll,
+  the focus ring, a small base reset (`box-sizing`, `html`, `body`, `img`) and the `prefers-reduced-motion` rules.
+
+**What `theme.js` provides**
+
+- Before first paint: language from `localStorage["sh1ftw-lang"]` or the browser, `<html lang>`; colour scheme from
+  `?theme=dark|light`, `localStorage["sh1ftw-theme"]` or the system (`data-theme` on `<html>`); `?still` adds `html.still`.
+- After the DOM is ready: the `.lang` buttons and `#theme` work and save their choice, `<title data-de="…">` swaps the
+  title, `<picture>` sources for dark mode follow the switch, `.reveal` elements fade in.
+- Events on `document`: `sh1ftw-lang`, `sh1ftw-theme`. API: `window.SH1FTW.lang()`, `.setLang()`, `.theme()`, `.setTheme()`,
+  `.reveal()` (for content rendered later).
+
+**What a page keeps for itself**
+
+Its palette (override the tokens above on `:root` and in the two dark blocks; at least `--accent`), its fonts if it has
+any, the hero, sections, cards, buttons, screenshots and texts. The start page overrides `--max`, `--nav-h`, `--nav-gap`
+and `--nav-pad` to stay a little more compact and styles its `.lang` like the platform filter.
+
+`build/` (ignored by git) holds the before/after comparison images from the migration.
