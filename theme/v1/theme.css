@@ -90,6 +90,7 @@ html[lang="de"] .en, html[lang="en"] .de { display: none !important; }
 .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 700; font-size: 17px; letter-spacing: -0.02em; text-decoration: none; }
 .brand:hover { text-decoration: none; }
 .brand img { width: 28px; height: 28px; border-radius: 8px; }
+.brand img.logo { width: auto; height: 26px; border-radius: 0; }
 .nav-links { display: flex; gap: 4px; margin-left: auto; font-size: 14px; font-weight: 500; }
 .nav-links a { color: var(--ink-2); text-decoration: none; padding: 8px 12px; border-radius: 999px; transition: background .2s, color .2s; }
 .nav-links a:hover { color: var(--ink); background: var(--chip); text-decoration: none; }

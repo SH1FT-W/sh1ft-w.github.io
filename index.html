@@ -40,6 +40,7 @@
   /* Glas-Navigation aus theme.css, hier nur die kompakteren Maße der Startseite und der Sprachschalter im Segment-Stil des Filters */
   .navwrap { padding: 0 max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left)); }
   .brand { font-size: 16px; letter-spacing: .01em; }
+  .brand img.logo { height: 38px; }
   .nav-links { gap: 2px; }
   .nav-links a { padding: 7px 12px; }
   .iconbtn { width: 34px; height: 34px; }
@@ -189,7 +190,7 @@
 <body>
 <div class="navwrap">
   <nav class="nav" aria-label="Site">
-    <a class="brand" href="#top">SH1FT-W</a>
+    <a class="brand" href="#top"><img class="logo" src="icons/sh1ft-w-logo.png" alt="SH1FT-W" width="91" height="38" decoding="async"></a>
     <div class="nav-links" id="navlinks"></div>
     <button class="iconbtn" id="theme" type="button" aria-label="Light or dark">
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
