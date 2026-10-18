@@ -1,0 +1,8 @@
+{
+  "name": "sh1ft-w-readme-images",
+  "private": true,
+  "description": "Renders the README title image and feature cards of every SH1FT-W repository in its project theme.",
+  "type": "module",
+  "scripts": { "render": "node render.mjs" },
+  "devDependencies": { "playwright": "1.61.1" }
+}
