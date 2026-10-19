@@ -44,6 +44,8 @@
       .home { font-weight: 600; letter-spacing: .01em; color: rgba(245,245,247,.82); padding: 6px 6px; margin-left: -6px;
         border-radius: 7px; transition: color .2s; }
       .home:hover { color: #fff; }
+      .home img { display: block; height: 20px; width: auto; opacity: .92; transition: opacity .2s; }
+      .home:hover img { opacity: 1; }
       .sep { flex: none; width: 1px; height: 18px; background: rgba(255,255,255,.16); margin: 0 10px 0 8px; }
       .p { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 4px; border-radius: 9px;
         transition: background .2s; }
@@ -53,6 +55,8 @@
       .ic.mac img { inset: -12.15%; width: 124.3%; height: 124.3%; }
       .ic.glyph { background: #2c2c2e; }
       .ic.glyph img { inset: 15%; width: 70%; height: 70%; }
+      .ic.glyph.light { background: #f5f5f7; }
+      .ic.glyph.grey { background: #8e8e93; }
       .ic::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 .5px rgba(255,255,255,.14); }
       .p:not(.on) .ic { opacity: .82; }
       .p.soon:not(.on) .ic { opacity: .42; }
@@ -80,7 +84,7 @@
       }
       @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
     </style>
-    <nav aria-label="SH1FT-W projects"><a class="home" href="${esc(base + (current ? "?from=" + encodeURIComponent(current) : ""))}" title="${de() ? "Alle SH1FT-W-Projekte" : "All SH1FT-W projects"}">SH1FT-W</a><span class="sep" aria-hidden="true"></span>${items}</nav><div class="tip" role="presentation"></div>`;
+    <nav aria-label="SH1FT-W projects"><a class="home" href="${esc(base + (current ? "?from=" + encodeURIComponent(current) : ""))}" title="${de() ? "Alle SH1FT-W-Projekte" : "All SH1FT-W projects"}"><img src="${esc(base + "icons/sh1ft-w-logo.png")}" alt="SH1FT-W" width="48" height="20"></a><span class="sep" aria-hidden="true"></span>${items}</nav><div class="tip" role="presentation"></div>`;
 
     const nav = root.querySelector("nav");
     const tip = root.querySelector(".tip");
