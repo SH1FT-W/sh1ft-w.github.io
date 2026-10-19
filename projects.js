@@ -28,7 +28,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Adaptives Licht, richtig gemacht: folgt der Sonne, holt aus jeder Lampe das Beste heraus, weckt dich mit einem Sonnenaufgang und lässt in Ruhe, was du selbst einstellst.",
   },
   {
-    id: "jbl-bar", name: "JBL Bar", platform: "Home Assistant", soon: true, icon: "icons/jbl-bar.png", iconStyle: "glyph light", color: "#ff6a00",
+    id: "jbl-bar", name: "JBL Bar", platform: "Home Assistant", repo: "SH1FT-W/jbl-bar",
+    site: "https://sh1ft-w.github.io/jbl-bar/", icon: "icons/jbl-bar.png", iconStyle: "glyph light", color: "#ff6a00",
     tagline: "JBL soundbars with JBL One, fully local in Home Assistant: fast, complete, no cloud.",
     tagline_de: "JBL-Soundbars mit JBL One komplett lokal in Home Assistant: schnell, vollständig, ohne Cloud.",
   },
