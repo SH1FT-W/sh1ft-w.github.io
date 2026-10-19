@@ -50,7 +50,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Deine PlayStation 5 in Home Assistant: Status, Aufwecken und Ruhemodus, komplett lokal ohne Cloud oder MQTT.",
   },
   {
-    id: "unifi-network-plus", name: "UniFi Network Plus", platform: "Home Assistant", soon: true, icon: "icons/unifi-network-plus.png", color: "#006fff",
+    id: "unifi-network-plus", name: "UniFi Network Plus", platform: "Home Assistant", repo: "SH1FT-W/unifi-network-plus",
+    site: "https://sh1ft-w.github.io/unifi-network-plus/", icon: "icons/unifi-network-plus.png", color: "#006fff",
     tagline: "Adds what the UniFi Network app shows and Home Assistant doesn't: throughput, clients, internet quality and speed tests.",
     tagline_de: "Ergänzt, was die UniFi-Network-App zeigt und Home Assistant nicht: Durchsatz, Clients, Internetqualität und Speedtest.",
   },
