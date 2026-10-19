@@ -47,7 +47,7 @@ if (!only || only === 'title') {
     const title = Object.assign({}, cfg.title, t, { shot: Object.assign({}, cfg.title.shot, (t && t.shot) || {}) });
     for (const dark of [false, true]) {
       const name = 'readme-title' + (variant ? '-' + variant : '') + (dark ? '-dark' : '-light') + '.png';
-      await shoot('title.html', { ...title, colors: cfg.colors, fonts: FONTS, dark, base }, { width: 1280, height: 640 }, 2,
+      await shoot('title.html', { ...title, colors: cfg.colors, fonts: FONTS, dark, base }, { width: 1280, height: 640 }, 3,
         path.join(outDir, name), async () => ({ x: 0, y: 0, width: 1280, height: 640 }));
     }
   }
