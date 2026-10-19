@@ -61,8 +61,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Merkt sich einen Zustand und stellt ihn später wieder her, außer jemand hat ihn inzwischen von Hand geändert. Moderner Ersatz für Saver.",
   },
   {
-    id: "unas", name: "UniFi UNAS", platform: "Home Assistant", repo: "SH1FT-W/unas",
-    site: "https://sh1ft-w.github.io/unas/", icon: "icons/unas.png", iconStyle: "glyph grey", color: "#006fff",
+    id: "unas", name: "UniFi UNAS", platform: "Home Assistant", repo: "SH1FT-W/unifi-unas",
+    site: "https://sh1ft-w.github.io/unifi-unas/", icon: "icons/unas.png", iconStyle: "glyph grey", color: "#006fff",
     tagline: "UniFi NAS in Home Assistant: storage, drives, data scrubs and health, locally through UniFi OS and UniFi Drive.",
     tagline_de: "UniFi-NAS in Home Assistant: Speicher, Laufwerke, Datenprüfung und Zustand, lokal über UniFi OS und UniFi Drive.",
   },
