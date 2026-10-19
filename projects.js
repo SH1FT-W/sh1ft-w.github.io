@@ -55,6 +55,11 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Ergänzt, was die UniFi-Network-App zeigt und Home Assistant nicht: Durchsatz, Clients, Internetqualität und Speedtest.",
   },
   {
+    id: "recall", name: "Recall", platform: "Home Assistant", soon: true, icon: "icons/recall.png", color: "#ff7a45",
+    tagline: "Remembers a state and restores it later, unless someone changed it by hand in the meantime. A modern replacement for Saver.",
+    tagline_de: "Merkt sich einen Zustand und stellt ihn später wieder her, außer jemand hat ihn inzwischen von Hand geändert. Moderner Ersatz für Saver.",
+  },
+  {
     id: "unas", name: "UniFi UNAS", platform: "Home Assistant", repo: "SH1FT-W/unas",
     site: "https://sh1ft-w.github.io/unas/", icon: "icons/unas.png", iconStyle: "glyph grey", color: "#006fff",
     tagline: "UniFi NAS in Home Assistant: storage, drives, data scrubs and health, locally through UniFi OS and UniFi Drive.",
