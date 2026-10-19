@@ -56,7 +56,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Ergänzt, was die UniFi-Network-App zeigt und Home Assistant nicht: Durchsatz, Clients, Internetqualität und Speedtest.",
   },
   {
-    id: "wetter", name: "Wetter", platform: "Home Assistant", soon: true, icon: "icons/wetter.png", iconStyle: "glyph", color: "#3d8bff",
+    id: "wetter", name: "Wetter & Warnungen", platform: "Home Assistant", repo: "SH1FT-W/wetter-warnungen",
+    site: "https://sh1ft-w.github.io/wetter-warnungen/", icon: "icons/wetter.png", iconStyle: "glyph", color: "#3d8bff",
     tagline: "Weather for your home in Home Assistant: the German Weather Service forecast, the nearest station and every official warning (DWD, NINA). Starts instantly, no account.",
     tagline_de: "Wetter fürs Zuhause in Home Assistant: Vorhersage des Deutschen Wetterdienstes, nächste Station und alle amtlichen Warnungen (DWD, NINA). Startet sofort, ohne Konto.",
   },
