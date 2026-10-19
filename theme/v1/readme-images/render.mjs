@@ -58,7 +58,7 @@ if (!only || only === 'cards') {
     const cards = Array.isArray(def) ? def : def.items, cols = Array.isArray(def) ? 2 : def.cols || 2;
     for (const dark of [false, true]) {
       const name = 'readme-cards-' + set + (dark ? '-dark' : '-light') + '.png';
-      await shoot('cards.html', { cards, cols, colors: cfg.colors, fonts: FONTS, dark }, { width: 932, height: 800 }, 2, path.join(outDir, name),
+      await shoot('cards.html', { cards, cols, colors: cfg.colors, fonts: FONTS, dark }, { width: 932, height: 800 }, 3, path.join(outDir, name),
         async (page) => { const b = await page.locator('#grid').boundingBox(); return { x: 0, y: 0, width: 932, height: Math.ceil(b.y + b.height + 2) }; });
     }
   }
