@@ -72,8 +72,8 @@ window.SH1FTW_PROJECTS = [
   {
     id: "fluval", name: "Fluval", platform: "Home Assistant", repo: "SH1FT-W/fluval",
     site: "https://sh1ft-w.github.io/fluval/", icon: "icons/fluval.png", iconStyle: "glyph light", color: "#0a8fd0",
-    tagline: "The Fluval Reef Nano 4.0 LED in Home Assistant over Bluetooth, robust and without surprises.",
-    tagline_de: "Die Fluval Reef Nano 4.0 LED in Home Assistant über Bluetooth, robust und ohne Überraschungen.",
+    tagline: "Fluval Bluetooth LEDs in Home Assistant, fully local: Reef and Plant 4.0, the Nanos, Plant PRO and more.",
+    tagline_de: "Fluval-Bluetooth-Lampen in Home Assistant, komplett lokal: Reef und Plant 4.0, die Nanos, Plant PRO und mehr.",
   },
   {
     id: "helialux", name: "HeliaLux", platform: "Home Assistant", repo: "SH1FT-W/helialux",
