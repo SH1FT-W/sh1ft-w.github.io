@@ -60,7 +60,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "UniFi-NAS in Home Assistant: Speicher, Laufwerke, Datenprüfung und Zustand, lokal über UniFi OS und UniFi Drive.",
   },
   {
-    id: "ring-plus", name: "Ring Plus", platform: "Home Assistant", soon: true, icon: "icons/ring-plus.png", iconStyle: "glyph", color: "#1998d5",
+    id: "ring-plus", name: "Ring Intercom Plus", platform: "Home Assistant", repo: "SH1FT-W/ring-intercom-plus",
+    site: "https://sh1ft-w.github.io/ring-intercom-plus/", icon: "icons/ring-plus.png", iconStyle: "glyph", color: "#1998d5",
     tagline: "Extra controls for the Ring Intercom, added to the official Ring integration: door opener, Ring-to-Open, unlock duration, restart.",
     tagline_de: "Zusatzfunktionen für die Ring Intercom neben der offiziellen Ring-Integration: Türöffner, Ring-to-Open, Öffnungsdauer, Neustart.",
   },
