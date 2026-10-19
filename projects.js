@@ -55,7 +55,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Ergänzt, was die UniFi-Network-App zeigt und Home Assistant nicht: Durchsatz, Clients, Internetqualität und Speedtest.",
   },
   {
-    id: "unas", name: "UniFi UNAS", platform: "Home Assistant", soon: true, icon: "icons/unas.png", iconStyle: "glyph grey", color: "#006fff",
+    id: "unas", name: "UniFi UNAS", platform: "Home Assistant", repo: "SH1FT-W/unas",
+    site: "https://sh1ft-w.github.io/unas/", icon: "icons/unas.png", iconStyle: "glyph grey", color: "#006fff",
     tagline: "UniFi NAS in Home Assistant: storage, drives, data scrubs and health, locally through UniFi OS and UniFi Drive.",
     tagline_de: "UniFi-NAS in Home Assistant: Speicher, Laufwerke, Datenprüfung und Zustand, lokal über UniFi OS und UniFi Drive.",
   },
