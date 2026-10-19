@@ -62,7 +62,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Wetter fürs Zuhause in Home Assistant: Vorhersage des Deutschen Wetterdienstes, nächste Station und alle amtlichen Warnungen (DWD, NINA). Startet sofort, ohne Konto.",
   },
   {
-    id: "recall", name: "Recall", platform: "Home Assistant", soon: true, icon: "icons/recall.png", color: "#ff7a45",
+    id: "recall", name: "Recall", platform: "Home Assistant", repo: "SH1FT-W/recall",
+    site: "https://sh1ft-w.github.io/recall/", icon: "icons/recall.png", color: "#ff7a45",
     tagline: "Remembers a state and restores it later, unless someone changed it by hand in the meantime. A modern replacement for Saver.",
     tagline_de: "Merkt sich einen Zustand und stellt ihn später wieder her, außer jemand hat ihn inzwischen von Hand geändert. Moderner Ersatz für Saver.",
   },
