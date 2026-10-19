@@ -36,7 +36,7 @@ async function shoot(file, inject, viewport, scale, out, clipFn) {
   await page.goto('file://' + path.join(here, file), { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(600);
-  await page.screenshot({ path: out, omitBackground: file === 'cards.html', clip: await clipFn(page) });
+  await page.screenshot({ path: out, omitBackground: file === 'cards.html', fullPage: true, clip: await clipFn(page) });
   await ctx.close();
   console.log('  ' + path.relative(repo, out));
 }
