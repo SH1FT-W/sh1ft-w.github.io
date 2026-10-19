@@ -44,7 +44,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Begleiter zum Plant Monitor: lernt den Gießzyklus jeder Pflanze, sagt das nächste Gießen voraus und schlägt Grenzwerte per KI vor, freigegeben von dir.",
   },
   {
-    id: "ps5", name: "PS5", platform: "Home Assistant", soon: true, icon: "icons/ps5.png", color: "#0070d1",
+    id: "ps5", name: "PS5", platform: "Home Assistant", repo: "SH1FT-W/playstation-5",
+    site: "https://sh1ft-w.github.io/playstation-5/", icon: "icons/ps5.png", color: "#0070d1",
     tagline: "Your PlayStation 5 in Home Assistant: status, wake and rest mode, fully local without cloud or MQTT.",
     tagline_de: "Deine PlayStation 5 in Home Assistant: Status, Aufwecken und Ruhemodus, komplett lokal ohne Cloud oder MQTT.",
   },
@@ -74,7 +75,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Die Fluval Reef Nano 4.0 LED in Home Assistant über Bluetooth, robust und ohne Überraschungen.",
   },
   {
-    id: "helialux", name: "HeliaLux", platform: "Home Assistant", soon: true, icon: "icons/helialux.png", iconStyle: "glyph light", color: "#003a5d",
+    id: "helialux", name: "HeliaLux", platform: "Home Assistant", repo: "SH1FT-W/helialux",
+    site: "https://sh1ft-w.github.io/helialux/", icon: "icons/helialux.png", iconStyle: "glyph light", color: "#003a5d",
     tagline: "The Juwel HeliaLux SmartControl in Home Assistant, local, robust and without surprises.",
     tagline_de: "Die Juwel HeliaLux SmartControl in Home Assistant, lokal, robust und ohne Überraschungen.",
   },
