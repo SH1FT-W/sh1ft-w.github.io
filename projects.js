@@ -56,6 +56,11 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Ergänzt, was die UniFi-Network-App zeigt und Home Assistant nicht: Durchsatz, Clients, Internetqualität und Speedtest.",
   },
   {
+    id: "wetter", name: "Wetter", platform: "Home Assistant", soon: true, icon: "icons/wetter.png", iconStyle: "glyph", color: "#3d8bff",
+    tagline: "Weather for your home in Home Assistant: the German Weather Service forecast, the nearest station and every official warning (DWD, NINA). Starts instantly, no account.",
+    tagline_de: "Wetter fürs Zuhause in Home Assistant: Vorhersage des Deutschen Wetterdienstes, nächste Station und alle amtlichen Warnungen (DWD, NINA). Startet sofort, ohne Konto.",
+  },
+  {
     id: "recall", name: "Recall", platform: "Home Assistant", soon: true, icon: "icons/recall.png", color: "#ff7a45",
     tagline: "Remembers a state and restores it later, unless someone changed it by hand in the meantime. A modern replacement for Saver.",
     tagline_de: "Merkt sich einen Zustand und stellt ihn später wieder her, außer jemand hat ihn inzwischen von Hand geändert. Moderner Ersatz für Saver.",
