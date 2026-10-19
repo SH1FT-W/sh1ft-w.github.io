@@ -65,9 +65,10 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Zusatzfunktionen für die Ring Intercom neben der offiziellen Ring-Integration: Türöffner, Ring-to-Open, Öffnungsdauer, Neustart.",
   },
   {
-    id: "chihiros", name: "Chihiros", platform: "Home Assistant", soon: true, icon: "icons/chihiros.png", color: "#e60012",
-    tagline: "Chihiros C II RGB lights and dosing pumps in Home Assistant, stable over Bluetooth proxies, no app needed.",
-    tagline_de: "Chihiros C II RGB und Dosierpumpe in Home Assistant, stabil über Bluetooth-Proxys, ohne App.",
+    id: "chihiros", name: "Chihiros", platform: "Home Assistant", repo: "SH1FT-W/chihiros",
+    site: "https://sh1ft-w.github.io/chihiros/", icon: "icons/chihiros.png", color: "#e60012",
+    tagline: "Chihiros LEDs, Commander and dosing pump in Home Assistant, fully local over Bluetooth proxies: every channel, schedules and doses.",
+    tagline_de: "Chihiros-Lampen, Commander und Dosierpumpe in Home Assistant, komplett lokal über Bluetooth-Proxys: jeder Kanal, Zeitpläne und Dosen.",
   },
   {
     id: "fluval", name: "Fluval", platform: "Home Assistant", repo: "SH1FT-W/fluval",
