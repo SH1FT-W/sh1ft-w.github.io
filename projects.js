@@ -70,7 +70,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Chihiros C II RGB und Dosierpumpe in Home Assistant, stabil über Bluetooth-Proxys, ohne App.",
   },
   {
-    id: "fluval", name: "Fluval", platform: "Home Assistant", soon: true, icon: "icons/fluval.png", iconStyle: "glyph light", color: "#0a8fd0",
+    id: "fluval", name: "Fluval", platform: "Home Assistant", repo: "SH1FT-W/fluval",
+    site: "https://sh1ft-w.github.io/fluval/", icon: "icons/fluval.png", iconStyle: "glyph light", color: "#0a8fd0",
     tagline: "The Fluval Reef Nano 4.0 LED in Home Assistant over Bluetooth, robust and without surprises.",
     tagline_de: "Die Fluval Reef Nano 4.0 LED in Home Assistant über Bluetooth, robust und ohne Überraschungen.",
   },
