@@ -33,6 +33,7 @@ A README embeds them with `<picture>` so the dark version loads in dark mode, an
 |:--|:--|
 | `title.name`, `eyebrow`, `lead`, `sub`, `pills` | The text on the left. `lead` may contain `<em>` for the accent colour and `<br>`. Pills are `["text"]` or `["text", "v"]` for the second colour. |
 | `title.logo` | Path of the app icon, relative to the repository. |
+| `title.nameSize` | Optional font size of the name in px (default 68) for long names that should wrap onto two lines. |
 | `title.logoWide` | `true` when `logo` is a full logo with wordmark: shown alone, without the rounded icon frame and the name. |
 | `title.grid` | `true` draws a faint dot grid on the background (FLODE). |
 | `title.shot` | The screenshot: `light`/`dark` paths, `srcW` (its pixel width), `winW` (how many source pixels the window shows), `s` (scale), `strips` (`[[y0, y1], …]` rows of the source that are shown, the rest is skipped), `bar` (window title, `null` for a floating panel), `left`/`top` (position), `flat` (less perspective). |

@@ -63,6 +63,8 @@
   document.getElementById('logo').src = T.base + T.logo;
   if (T.logoWide) { document.querySelector('.brand').classList.add('wide'); document.getElementById('logo').alt = T.name; }
   document.getElementById('name').textContent = T.name;
+  // Long names (Pflanzenmonitor Plus) wrap at a smaller size: title.nameSize in px, default 68.
+  if (T.nameSize) document.getElementById('name').style.fontSize = T.nameSize + 'px';
   document.getElementById('eyebrow').textContent = T.eyebrow;
   document.getElementById('lead').innerHTML = T.lead;
   document.getElementById('sub').textContent = T.sub;
