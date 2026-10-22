@@ -39,9 +39,10 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Live-Bild für Reolink-Kameras ohne eigenen Stream, direkt am Gerät der Reolink-Integration, mit der Proxy-App gesteuert aus Home Assistant.",
   },
   {
-    id: "pflanzenmonitor-plus", name: "Pflanzenmonitor Plus", platform: "Home Assistant", soon: true, icon: "icons/pflanzenmonitor-plus.png", iconStyle: "glyph", color: "#4caf50",
-    tagline: "Companion to Plant Monitor: learns each plant's watering cycle, predicts the next watering and suggests thresholds with AI, approved by you.",
-    tagline_de: "Begleiter zum Plant Monitor: lernt den Gießzyklus jeder Pflanze, sagt das nächste Gießen voraus und schlägt Grenzwerte per KI vor, freigegeben von dir.",
+    id: "pflanzenmonitor-plus", name: "Pflanzenmonitor Plus", platform: "Home Assistant", repo: "SH1FT-W/pflanzenmonitor-plus",
+    site: "https://sh1ft-w.github.io/pflanzenmonitor-plus/", icon: "icons/pflanzenmonitor-plus.png", iconStyle: "glyph", color: "#4caf50",
+    tagline: "The plant integration that learns: status and limits for every plant, a watering forecast from its own history and AI-suggested limits you approve. Takes over Plant Monitor plants in one step.",
+    tagline_de: "Die Pflanzen-Integration, die mitlernt: Zustand und Grenzwerte für jede Pflanze, eine Gieß-Vorhersage aus ihrem eigenen Verlauf und KI-Grenzwerte mit deiner Freigabe. Übernimmt Plant-Monitor-Pflanzen in einem Schritt.",
   },
   {
     id: "ps5", name: "PS5", platform: "Home Assistant", repo: "SH1FT-W/playstation-5",
