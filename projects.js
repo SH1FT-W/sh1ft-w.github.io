@@ -69,7 +69,8 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "UniFi-NAS in Home Assistant: Speicher, Laufwerke, Datenprüfung und Zustand, lokal über UniFi OS und UniFi Drive.",
   },
   {
-    id: "unifi-dreamrouter7", name: "UniFi Dream Router 7", platform: "Home Assistant", soon: true, icon: "icons/unifi-dreamrouter7.png", iconStyle: "glyph light", color: "#006fff",
+    id: "unifi-dreamrouter7", name: "UniFi Dream Router 7", platform: "Home Assistant", repo: "SH1FT-W/unifi-dreamrouter7",
+    site: "https://sh1ft-w.github.io/unifi-dreamrouter7/", icon: "icons/unifi-dreamrouter7.png", iconStyle: "glyph light", color: "#006fff",
     tagline: "Your Dream Router 7 and every UniFi device behind it in Home Assistant: WiFi, firewall, ports, PoE, clients and speed tests, locally and with more control than the official integration.",
     tagline_de: "Dein Dream Router 7 und alle UniFi-Geräte dahinter in Home Assistant: WLAN, Firewall, Ports, PoE, Clients und Speedtest, lokal und mit mehr Steuerung als die offizielle Integration.",
   },
