@@ -4,6 +4,10 @@
 //   node social-preview.mjs casora     only one (the local folder name)
 // A window opens on github.com; sign in once (with 2FA if asked), then the script continues on its own and
 // prints one line per repository. Needs the playwright package of this folder (npm install) and a screen.
+// Passkey sign-in does not work in this window. Instead, copy the `user_session` cookie of github.com from a
+// browser you are signed in with (DevTools › Application › Cookies › https://github.com › user_session) and run
+//   GITHUB_SESSION=<value> node social-preview.mjs
+// The script then runs without a window and never stores the cookie.
 import { createRequire } from 'node:module';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -23,11 +27,19 @@ const only = process.argv[2];
 const jobs = Object.entries(REPOS).filter(([dir]) => !only || dir === only);
 
 const profile = path.join(process.env.HOME, '.cache', 'sh1ft-w-social-preview');   // keeps the GitHub sign-in between runs
-const ctx = await chromium.launchPersistentContext(profile, { headless: false, viewport: { width: 1280, height: 900 } });
+const session = process.env.GITHUB_SESSION;
+const ctx = session
+  ? await chromium.launchPersistentContext(profile + '-cookie', { headless: true, viewport: { width: 1280, height: 900 } })
+  : await chromium.launchPersistentContext(profile, { headless: false, viewport: { width: 1280, height: 900 } });
+if (session) {
+  const c = (name, value, extra = {}) => ({ name, value, domain: 'github.com', path: '/', secure: true, sameSite: 'Lax', ...extra });
+  await ctx.addCookies([c('user_session', session, { httpOnly: true }), c('__Host-user_session_same_site', session, { httpOnly: true, sameSite: 'Strict' }), c('logged_in', 'yes')]);
+}
 const page = await ctx.newPage();
 
 await page.goto('https://github.com/login');
-if (!page.url().startsWith('https://github.com/login')) console.log('already signed in');
+if (!page.url().startsWith('https://github.com/login')) console.log('signed in');
+else if (session) { console.log('the cookie did not sign in, it may have expired'); await ctx.close(); process.exit(1); }
 else {
   console.log('please sign in to GitHub in the window');
   await page.waitForURL((u) => !u.href.includes('/login') && !u.href.includes('/sessions/'), { timeout: 10 * 60 * 1000 });
@@ -50,6 +62,9 @@ for (const [dir, repo] of jobs) {
     console.log(`${repo}: failed (${e.message.split('\n')[0]})`);
   }
 }
-console.log('done, the window stays open for a look; close it to finish');
-await page.waitForEvent('close', { timeout: 0 }).catch(() => {});
-await ctx.close();
+if (session) { await ctx.close(); fs.rmSync(profile + '-cookie', { recursive: true, force: true }); console.log('done'); }
+else {
+  console.log('done, the window stays open for a look; close it to finish');
+  await page.waitForEvent('close', { timeout: 0 }).catch(() => {});
+  await ctx.close();
+}
