@@ -112,15 +112,17 @@ function table(cards, cols, iconDir) {
   for (let i = 0; i < cards.length; i += cols) {
     const cells = cards.slice(i, i + cols).map((c) => {
       let icon;
-      if (/[\/]/.test(c.icon)) icon = `<img src="${c.icon}" width="26" height="26" alt="">`;
+      if (/[\/]/.test(c.icon)) icon = `<img src="${c.icon}" width="22" height="22" align="absmiddle" alt="">`;
       else {
         const svg = mdi(c.icon);
         for (const [mode, color] of [['light', cfg.colors.light.accentText], ['dark', cfg.colors.dark.accentText]])
           fs.writeFileSync(path.join(iconDir, `${c.icon}-${mode}.svg`), svg.replace('<svg ', `<svg fill="${color}" `));
-        icon = `<picture><source media="(prefers-color-scheme: dark)" srcset="${rel}/${c.icon}-dark.svg"><img src="${rel}/${c.icon}-light.svg" width="26" height="26" alt=""></picture>`;
+        icon = `<picture><source media="(prefers-color-scheme: dark)" srcset="${rel}/${c.icon}-dark.svg"><img src="${rel}/${c.icon}-light.svg" width="22" height="22" align="absmiddle" alt=""></picture>`;
       }
       const ver = c.ver ? ` <code>${esc(c.ver)}</code>` : '';
-      return `<td width="34" valign="top">${icon}</td><td width="${Math.floor(100 / cols) - 4}%" valign="top"><b>${esc(c.title)}</b>${ver}<br>${esc(c.text)}</td>`;
+      // One cell per card: the icon sits inline before the title. A cell of its own for the icon shrinks to nothing on
+      // GitHub, because an image with max-width: 100% has no minimum width in the table layout.
+      return `<td width="${Math.floor(100 / cols)}%" valign="top">${icon} <b>${esc(c.title)}</b>${ver}<br>${esc(c.text)}</td>`;
     });
     rows.push('<tr>' + cells.join('') + '</tr>');
   }
