@@ -34,11 +34,6 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "JBL-Soundbars mit JBL One komplett lokal in Home Assistant: schnell, vollständig, ohne Cloud.",
   },
   {
-    id: "reolink-plus", name: "Reolink Plus", platform: "Home Assistant", soon: true, icon: "icons/reolink-plus.png", color: "#1a5cf5",
-    tagline: "Live video for Reolink cameras that have no stream of their own, attached right to the Reolink device, with the proxy app controlled from Home Assistant.",
-    tagline_de: "Live-Bild für Reolink-Kameras ohne eigenen Stream, direkt am Gerät der Reolink-Integration, mit der Proxy-App gesteuert aus Home Assistant.",
-  },
-  {
     id: "pflanzenmonitor-plus", name: "Pflanzenmonitor Plus", platform: "Home Assistant", repo: "SH1FT-W/pflanzenmonitor-plus",
     site: "https://sh1ft-w.github.io/pflanzenmonitor-plus/", icon: "icons/pflanzenmonitor-plus.png", iconStyle: "glyph", color: "#4caf50",
     tagline: "The plant integration that learns: status and limits for every plant, a watering forecast from its own history and AI-suggested limits you approve. Takes over Plant Monitor plants in one step.",
