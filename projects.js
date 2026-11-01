@@ -23,11 +23,6 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Merkt, wenn Batteriesensoren in Home Assistant verstummen, ohne sie abzufragen.",
   },
   {
-    id: "evenlight", name: "Evenlight", platform: "Home Assistant", soon: true, icon: "icons/evenlight.png", iconStyle: "glyph", color: "#E8A33D",
-    tagline: "Adaptive lighting done right: follows the sun, gets the most out of every lamp, wakes you with a sunrise and leaves alone what you set by hand.",
-    tagline_de: "Adaptives Licht, richtig gemacht: folgt der Sonne, holt aus jeder Lampe das Beste heraus, weckt dich mit einem Sonnenaufgang und lässt in Ruhe, was du selbst einstellst.",
-  },
-  {
     id: "jbl-bar", name: "JBL Bar", platform: "Home Assistant", repo: "SH1FT-W/jbl-bar",
     site: "https://sh1ft-w.github.io/jbl-bar/", icon: "icons/jbl-bar.png", iconStyle: "glyph light", color: "#ff6a00",
     tagline: "JBL soundbars with JBL One, fully local in Home Assistant: fast, complete, no cloud.",
@@ -92,11 +87,6 @@ window.SH1FTW_PROJECTS = [
     site: "https://sh1ft-w.github.io/helialux/", icon: "icons/helialux.png", iconStyle: "glyph light", color: "#003a5d",
     tagline: "The Juwel HeliaLux SmartControl in Home Assistant, local, robust and without surprises.",
     tagline_de: "Die Juwel HeliaLux SmartControl in Home Assistant, lokal, robust und ohne Überraschungen.",
-  },
-  {
-    id: "delonghi", name: "De'Longhi", platform: "Home Assistant", soon: true, icon: "icons/delonghi.png", color: "#94623F",
-    tagline: "Your De'Longhi coffee machine in Home Assistant with just a smart plug: learns every program, counts every cup, knows when it needs care.",
-    tagline_de: "Dein De'Longhi-Kaffeevollautomat in Home Assistant, nur mit einer Steckdose: lernt jedes Programm, zählt jede Tasse, weiß, wann Pflege fällig ist.",
   },
   {
     id: "agentbar", name: "AgentBar", platform: "macOS", repo: "SH1FT-W/agentbar",

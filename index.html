@@ -277,7 +277,7 @@
     document.querySelector('meta[name="description"]').content = t.desc;
     const live = projects.filter((p) => !p.soon), soon = projects.filter((p) => p.soon);
     document.getElementById("stats").innerHTML =
-      `<span class="stat"><b>${live.length}</b> ${t.released}</span><span class="stat"><b>${soon.length}</b> ${t.coming}</span>`;
+      `<span class="stat"><b>${live.length}</b> ${t.released}</span>` + (soon.length ? `<span class="stat"><b>${soon.length}</b> ${t.coming}</span>` : "");
     document.getElementById("shelf").innerHTML = projects.map((p) =>
       p.soon ? `<span class="soon">${icon(p)}</span>` : `<a href="${esc(p.site)}" title="${esc(p.name)}" tabindex="-1">${icon(p)}</a>`).join("");
     document.getElementById("navlinks").innerHTML = groups.map((g) => `<a href="#${slug(g.name)}">${esc(label(g.name))}</a>`).join("");
@@ -291,7 +291,7 @@
     document.getElementById("list").innerHTML = groups.map((g) => {
       const gl = g.items.filter((p) => !p.soon), gs = g.items.filter((p) => p.soon);
       return `<section id="${slug(g.name)}" aria-label="${esc(label(g.name))}" data-g="${esc(g.name)}"${filter && filter !== g.name ? " hidden" : ""}>` +
-        `<div class="sechead reveal"><h2>${esc(label(g.name))}</h2><p>${gl.length} ${t.released} · ${gs.length} ${t.coming}</p></div>` +
+        `<div class="sechead reveal"><h2>${esc(label(g.name))}</h2><p>${gl.length} ${t.released}${gs.length ? " · " + gs.length + " " + t.coming : ""}</p></div>` +
         (gl.length ? `<ul class="cards">${gl.map(card).join("")}</ul>` : "") +
         (gs.length ? `<h3 class="sub reveal">${t.soon}</h3><ul class="soon-list reveal">${gs.map(soonItem).join("")}</ul>` : "") +
         `</section>`;
