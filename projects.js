@@ -65,7 +65,7 @@ window.SH1FTW_PROJECTS = [
   {
     id: "sf-symbols", name: "SF Symbols", platform: "Home Assistant", repo: "SH1FT-W/sf-symbols",
     version: "26.10.5", released: "2026-10-24",
-    site: "https://github.com/SH1FT-W/sf-symbols", icon: "icons/sf-symbols.png", iconStyle: "mac", color: "#4f6bff",
+    site: "https://sh1ft-w.github.io/sf-symbols/", icon: "icons/sf-symbols.png", iconStyle: "mac", color: "#4f6bff",
     tagline: "Apple's SF Symbols as icons everywhere in Home Assistant: sf: and ios: prefixes, hierarchical and multicolor variants, a drop-in for Cupertino Icons.",
     tagline_de: "Apples SF Symbols als Icons überall in Home Assistant: Präfixe sf: und ios:, hierarchische und mehrfarbige Varianten, ersetzt Cupertino Icons ohne Umbau.",
   },
