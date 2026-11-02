@@ -1,107 +1,126 @@
 // Single source for the project list: used by the start page and by bar.js on every project site.
 // New project: add one entry here (icon into icons/), every page picks it up automatically.
 // Projects are grouped by `platform`, in the order the platforms first appear.
+// version / released: last GitHub release (without "v") and its date, shown at once and replaced by the live value
+// from the GitHub API on the start page; only a fallback (offline, rate limit), update it now and then.
 // iconStyle: omit for a full-bleed square icon; "mac" for a macOS icon with its built-in margin;
 // "glyph" for a transparent mark that gets a neutral tile behind it; "glyph light" keeps that tile white in dark mode (dark marks); "glyph grey" tints it for white marks.
 window.SH1FTW_PROJECTS = [
   {
     id: "casora", name: "Casora", platform: "Home Assistant", repo: "SH1FT-W/casora",
+    version: "26.11.6", released: "2026-11-02",
     site: "https://sh1ft-w.github.io/casora/", icon: "icons/casora.png", iconStyle: "glyph", color: "#B67A50",
     tagline: "A calm, room-by-room dashboard for Home Assistant, with a visual studio to shape each room.",
     tagline_de: "Ein ruhiges Dashboard für Home Assistant, Raum für Raum, mit einem Studio, in dem du jeden Raum gestaltest.",
   },
   {
     id: "flode", name: "FLODE", platform: "Home Assistant", repo: "SH1FT-W/flode",
+    version: "26.10.18", released: "2026-10-31",
     site: "https://sh1ft-w.github.io/flode/", icon: "icons/flode.svg", color: "#4cc9fb",
     tagline: "See and edit your automations and scripts as a flow, saved as plain Home Assistant YAML.",
     tagline_de: "Automationen und Skripte als Ablauf sehen und bearbeiten, gespeichert als ganz normales Home-Assistant-YAML.",
   },
   {
     id: "pulse", name: "Pulse", platform: "Home Assistant", repo: "SH1FT-W/pulse",
+    version: "26.11.2", released: "2026-11-02",
     site: "https://sh1ft-w.github.io/pulse/", icon: "icons/pulse.svg", color: "#a78bfa",
     tagline: "Notices when battery sensors in Home Assistant go quiet, without polling them.",
     tagline_de: "Merkt, wenn Batteriesensoren in Home Assistant verstummen, ohne sie abzufragen.",
   },
   {
     id: "jbl-bar", name: "JBL Bar", platform: "Home Assistant", repo: "SH1FT-W/jbl-bar",
+    version: "26.10.3", released: "2026-10-19",
     site: "https://sh1ft-w.github.io/jbl-bar/", icon: "icons/jbl-bar.png", iconStyle: "glyph light", color: "#ff6a00",
     tagline: "JBL soundbars with JBL One, fully local in Home Assistant: fast, complete, no cloud.",
     tagline_de: "JBL-Soundbars mit JBL One komplett lokal in Home Assistant: schnell, vollständig, ohne Cloud.",
   },
   {
     id: "pflanzenmonitor-plus", name: "Pflanzenmonitor Plus", platform: "Home Assistant", repo: "SH1FT-W/pflanzenmonitor-plus",
+    version: "26.10.1", released: "2026-10-22",
     site: "https://sh1ft-w.github.io/pflanzenmonitor-plus/", icon: "icons/pflanzenmonitor-plus.png", iconStyle: "glyph", color: "#4caf50",
     tagline: "The plant integration that learns: status and limits for every plant, a watering forecast from its own history and AI-suggested limits you approve. Takes over Plant Monitor plants in one step.",
     tagline_de: "Die Pflanzen-Integration, die mitlernt: Zustand und Grenzwerte für jede Pflanze, eine Gieß-Vorhersage aus ihrem eigenen Verlauf und KI-Grenzwerte mit deiner Freigabe. Übernimmt Plant-Monitor-Pflanzen in einem Schritt.",
   },
   {
     id: "ps5", name: "PS5", platform: "Home Assistant", repo: "SH1FT-W/playstation-5",
+    version: "26.10.3", released: "2026-10-25",
     site: "https://sh1ft-w.github.io/playstation-5/", icon: "icons/ps5.png", color: "#0070d1",
     tagline: "Your PlayStation 5 in Home Assistant: status, wake and rest mode, fully local without cloud or MQTT.",
     tagline_de: "Deine PlayStation 5 in Home Assistant: Status, Aufwecken und Ruhemodus, komplett lokal ohne Cloud oder MQTT.",
   },
   {
     id: "wetter", name: "Wetter & Warnungen", platform: "Home Assistant", repo: "SH1FT-W/wetter-warnungen",
+    version: "26.10.10", released: "2026-10-25",
     site: "https://sh1ft-w.github.io/wetter-warnungen/", icon: "icons/wetter.png", iconStyle: "glyph", color: "#3d8bff",
     tagline: "Weather for your home in Home Assistant: the German Weather Service forecast, the nearest station and every official warning (DWD, NINA). Starts instantly, no account.",
     tagline_de: "Wetter fürs Zuhause in Home Assistant: Vorhersage des Deutschen Wetterdienstes, nächste Station und alle amtlichen Warnungen (DWD, NINA). Startet sofort, ohne Konto.",
   },
   {
     id: "recall", name: "Recall", platform: "Home Assistant", repo: "SH1FT-W/recall",
+    version: "26.11.1", released: "2026-11-02",
     site: "https://sh1ft-w.github.io/recall/", icon: "icons/recall.png", color: "#ff7a45",
     tagline: "Remembers a state and restores it later, unless someone changed it by hand in the meantime. A modern replacement for Saver.",
     tagline_de: "Merkt sich einen Zustand und stellt ihn später wieder her, außer jemand hat ihn inzwischen von Hand geändert. Moderner Ersatz für Saver.",
   },
   {
     id: "sf-symbols", name: "SF Symbols", platform: "Home Assistant", repo: "SH1FT-W/sf-symbols",
+    version: "26.10.5", released: "2026-10-24",
     site: "https://github.com/SH1FT-W/sf-symbols", icon: "icons/sf-symbols.png", iconStyle: "mac", color: "#4f6bff",
     tagline: "Apple's SF Symbols as icons everywhere in Home Assistant: sf: and ios: prefixes, hierarchical and multicolor variants, a drop-in for Cupertino Icons.",
     tagline_de: "Apples SF Symbols als Icons überall in Home Assistant: Präfixe sf: und ios:, hierarchische und mehrfarbige Varianten, ersetzt Cupertino Icons ohne Umbau.",
   },
   {
     id: "unas", name: "UniFi UNAS", platform: "Home Assistant", repo: "SH1FT-W/unifi-unas",
+    version: "26.10.3", released: "2026-10-22",
     site: "https://sh1ft-w.github.io/unifi-unas/", icon: "icons/unas.png", iconStyle: "glyph light", color: "#006fff",
     tagline: "UniFi NAS in Home Assistant: storage, drives, data scrubs and health, locally through UniFi OS and UniFi Drive.",
     tagline_de: "UniFi-NAS in Home Assistant: Speicher, Laufwerke, Datenprüfung und Zustand, lokal über UniFi OS und UniFi Drive.",
   },
   {
     id: "unifi-dreamrouter7", name: "UniFi Dream Router 7", platform: "Home Assistant", repo: "SH1FT-W/unifi-dreamrouter7",
+    version: "26.10.4", released: "2026-10-31",
     site: "https://sh1ft-w.github.io/unifi-dreamrouter7/", icon: "icons/unifi-dreamrouter7.png", iconStyle: "glyph light", color: "#006fff",
     tagline: "Your Dream Router 7 and every UniFi device behind it in Home Assistant: WiFi, firewall, ports, PoE, clients and speed tests, locally and with more control than the official integration.",
     tagline_de: "Dein Dream Router 7 und alle UniFi-Geräte dahinter in Home Assistant: WLAN, Firewall, Ports, PoE, Clients und Speedtest, lokal und mit mehr Steuerung als die offizielle Integration.",
   },
   {
     id: "ring-plus", name: "Ring Intercom Plus", platform: "Home Assistant", repo: "SH1FT-W/ring-intercom-plus",
+    version: "26.11.1", released: "2026-11-02",
     site: "https://sh1ft-w.github.io/ring-intercom-plus/", icon: "icons/ring-plus.png", iconStyle: "glyph", color: "#1998d5",
     tagline: "Extra controls for the Ring Intercom, added to the official Ring integration: door opener, Ring-to-Open, unlock duration, restart.",
     tagline_de: "Zusatzfunktionen für die Ring Intercom neben der offiziellen Ring-Integration: Türöffner, Ring-to-Open, Öffnungsdauer, Neustart.",
   },
   {
     id: "chihiros", name: "Chihiros", platform: "Home Assistant", repo: "SH1FT-W/chihiros",
+    version: "26.11.1", released: "2026-11-02",
     site: "https://sh1ft-w.github.io/chihiros/", icon: "icons/chihiros.png", color: "#e60012",
     tagline: "Chihiros LEDs, Commander and dosing pump in Home Assistant, fully local over Bluetooth proxies: every channel, schedules and doses.",
     tagline_de: "Chihiros-Lampen, Commander und Dosierpumpe in Home Assistant, komplett lokal über Bluetooth-Proxys: jeder Kanal, Zeitpläne und Dosen.",
   },
   {
     id: "fluval", name: "Fluval", platform: "Home Assistant", repo: "SH1FT-W/fluval",
+    version: "26.11.2", released: "2026-11-02",
     site: "https://sh1ft-w.github.io/fluval/", icon: "icons/fluval.png", iconStyle: "glyph light", color: "#0a8fd0",
     tagline: "Fluval Bluetooth LEDs in Home Assistant, fully local: Reef and Plant 4.0, the Nanos, Plant PRO and more.",
     tagline_de: "Fluval-Bluetooth-Lampen in Home Assistant, komplett lokal: Reef und Plant 4.0, die Nanos, Plant PRO und mehr.",
   },
   {
     id: "helialux", name: "HeliaLux", platform: "Home Assistant", repo: "SH1FT-W/helialux",
+    version: "26.11.1", released: "2026-11-02",
     site: "https://sh1ft-w.github.io/helialux/", icon: "icons/helialux.png", iconStyle: "glyph light", color: "#003a5d",
     tagline: "The Juwel HeliaLux SmartControl in Home Assistant, local, robust and without surprises.",
     tagline_de: "Die Juwel HeliaLux SmartControl in Home Assistant, lokal, robust und ohne Überraschungen.",
   },
   {
     id: "agentbar", name: "AgentBar", platform: "macOS", repo: "SH1FT-W/agentbar",
+    version: "26.10.14", released: "2026-10-31",
     site: "https://sh1ft-w.github.io/agentbar/", icon: "icons/agentbar.png", iconStyle: "mac", color: "#2997ff",
     tagline: "Your Claude Code agents in the macOS menu bar, with a tiny animated office.",
     tagline_de: "Deine Claude-Code-Agenten in der macOS-Menüleiste, mit einem kleinen animierten Büro.",
   },
   {
     id: "sharemount", name: "ShareMount", platform: "macOS", repo: "SH1FT-W/sharemount",
+    version: "26.10.7", released: "2026-10-31",
     site: "https://sh1ft-w.github.io/sharemount/", icon: "icons/sharemount.png", iconStyle: "mac", color: "#5b8def",
     tagline: "Network shares that reconnect by themselves, right from the menu bar.",
     tagline_de: "Netzwerkfreigaben, die sich von selbst wieder verbinden, direkt aus der Menüleiste.",

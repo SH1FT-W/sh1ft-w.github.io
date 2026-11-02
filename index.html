@@ -127,6 +127,8 @@
   .card .ic { --s: 60px; }
   .ver { font-size: 14px; font-weight: 500; color: var(--ink-2); letter-spacing: 0; font-variant-numeric: tabular-nums; padding: 5px 10px; border-radius: 99px; background: var(--pill); }
   .ver:empty { display: none; }
+  .ver .d { color: var(--ink-3); font-weight: 400; white-space: nowrap; }
+  .ver .d::before { content: "·"; margin: 0 6px; }
   .title { position: relative; margin: 0; font-size: 23px; line-height: 1.2; font-weight: 700; letter-spacing: -.022em; }
   .tag { position: relative; margin: 8px 0 0; color: var(--ink-2); font-size: 16px; line-height: 1.42; text-wrap: pretty; flex: 1; }
   .links { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 20px; font-size: 15px; letter-spacing: -.01em; }
@@ -237,10 +239,10 @@
   const origin = projects.find((p) => p.id === from && !p.soon);
   const T = {
     en: { back: (n) => "Back to " + n, soon: "Coming soon", visit: "Visit website", site: (n) => n + " website", gh: (n) => n + " on GitHub",
-          latest: "Latest release", all: "All", released: "released", coming: "coming soon",
+          latest: "Latest release", published: "published", all: "All", released: "released", coming: "coming soon",
           desc: "Small, careful open source tools for Home Assistant and the Mac. Local first, no cloud accounts, no tracking." },
     de: { back: (n) => "Zurück zu " + n, soon: "Demnächst", visit: "Zur Website", site: (n) => "Website von " + n, gh: (n) => n + " auf GitHub",
-          latest: "Neueste Version", all: "Alle", released: "veröffentlicht", coming: "demnächst",
+          latest: "Neueste Version", published: "veröffentlicht am", all: "Alle", released: "veröffentlicht", coming: "demnächst",
           desc: "Kleine, sorgfältige Open-Source-Werkzeuge für Home Assistant und den Mac. Lokal, ohne Cloud-Konten, ohne Tracking." },
   };
   let t = T.en, lang = "en";
@@ -249,7 +251,7 @@
   const card = (p) => {
     const isFrom = origin && origin.id === p.id;
     return `<li class="card reveal${isFrom ? " from" : ""}" id="${esc(p.id)}" style="--c:${esc(p.color)}"${isFrom ? ' aria-current="true"' : ""}>
-      <div class="top">${icon(p)}<span class="ver" data-ver="${esc(p.id)}"></span></div>
+      <div class="top">${icon(p)}<span class="ver" data-ver="${esc(p.id)}"${verTitle(p.id)}>${verHtml(p.id)}</span></div>
       <h3 class="title">${esc(p.name)}</h3><p class="tag">${tagline(p)}</p>
       <div class="links"><a class="site" href="${esc(p.site)}" aria-label="${esc(t.site(p.name))}">${t.visit}<span class="chev" aria-hidden="true">›</span></a>` +
       `<a class="gh" href="https://github.com/${esc(p.repo)}" aria-label="${esc(t.gh(p.name))}">GitHub<span class="chev" aria-hidden="true">›</span></a></div></li>`;
@@ -267,7 +269,25 @@
     g.items.push(p);
   });
   const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  // Version and date of the last release: first the fixed values from projects.js (no layout jump), then the cached
+  // or live value from the GitHub API replaces them silently.
   const versions = {};
+  projects.forEach((p) => { if (p.version) versions[p.id] = { v: p.version, d: p.released || "" }; });
+  const fmtDate = (d, long) => {
+    try {
+      return new Intl.DateTimeFormat(lang === "de" ? "de-DE" : "en-GB",
+        { day: "numeric", month: long ? "long" : "short", year: "numeric", timeZone: "UTC" }).format(new Date(d + "T12:00:00Z"));
+    } catch (e) { return d; }
+  };
+  const verHtml = (id) => {
+    const x = versions[id];
+    return x ? esc(x.v) + (x.d ? `<span class="d">${esc(fmtDate(x.d))}</span>` : "") : "";
+  };
+  const verText = (id) => {
+    const x = versions[id];
+    return x ? t.latest + (x.d ? ", " + t.published + " " + fmtDate(x.d, true) : "") : "";
+  };
+  const verTitle = (id) => (versions[id] ? ` title="${esc(verText(id))}"` : "");
   // Plattform-Filter (je Betrachter gemerkt); ein ?from=-Besuch zeigt immer alles, damit die Ausgangskarte sichtbar ist.
   let filter = "";
   try { filter = origin ? "" : localStorage.getItem("sh1ftw-filter") || ""; } catch (e) {}
@@ -301,30 +321,60 @@
       try { localStorage.setItem("sh1ftw-filter", filter); } catch (e) {}
       render(lang);
     }));
-    Object.keys(versions).forEach(showVer);
     window.SH1FTW.reveal();
   }
   function showVer(id) {
     const el = document.querySelector(`[data-ver="${id}"]`);
-    if (el) { el.textContent = versions[id]; el.title = t.latest; }
+    if (!el) return;
+    el.innerHTML = verHtml(id);
+    el.title = verText(id);
+  }
+  function setVer(id, v, d) {
+    const x = versions[id];
+    if (x && x.v === v && x.d === d) return;
+    versions[id] = { v, d };
+    showVer(id);
   }
   // Sprache und Hell/Dunkel macht theme.js (Schalter, Speicherung, lang-Attribut); hier nur neu zeichnen, wenn die Sprache wechselt.
   render(window.SH1FTW.lang());
   document.addEventListener("sh1ftw-lang", () => { if (window.SH1FTW.lang() !== lang) render(window.SH1FTW.lang()); });
 
-  // Neueste Version je Projekt, live von GitHub (für die Sitzung gemerkt, still bei Offline oder API-Limit).
+  // Latest release per project, live from GitHub. Unauthenticated the API allows 60 requests per hour and visitor, so
+  // every answer is kept for an hour in localStorage (shared by all tabs); after a rate limit nothing is asked until
+  // GitHub's reset time. Offline or blocked storage: the fixed values stay. A cached value only replaces the fixed
+  // one when it is not older (projects.js may have been updated after the cache was written).
+  const CACHE = "sh1ftw-rel-", WAIT = "sh1ftw-rel-wait", TTL = 3600 * 1000;
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+  };
+  const cached = (id) => {
+    try {
+      const c = JSON.parse(store.get(CACHE + id) || "null");
+      return c && typeof c.v === "string" && c.v && typeof c.at === "number" ? c : null;
+    } catch (e) { return null; }
+  };
+  let waitUntil = Number(store.get(WAIT)) || 0;
   projects.filter((p) => p.repo && !p.soon).forEach(async (p) => {
-    const key = "sh1ftw-ver-" + p.id;
-    let ver = null;
-    try { ver = sessionStorage.getItem(key); } catch (e) {}
-    if (!ver) {
-      try {
-        const r = await fetch(`https://api.github.com/repos/${p.repo}/releases/latest`);
-        if (r.ok) ver = String((await r.json()).tag_name || "").replace(/^v/i, "");
-        if (ver) try { sessionStorage.setItem(key, ver); } catch (e) {}
-      } catch (e) {}
-    }
-    if (ver) { versions[p.id] = ver; showVer(p.id); }
+    const c = cached(p.id);
+    const fixed = versions[p.id];
+    if (c && (!fixed || !c.d || !fixed.d || c.d >= fixed.d)) setVer(p.id, c.v, c.d || "");
+    if ((c && Date.now() - c.at < TTL) || Date.now() < waitUntil) return;
+    try {
+      const r = await fetch(`https://api.github.com/repos/${p.repo}/releases/latest`);
+      if (r.status === 403 || r.status === 429) {
+        const reset = Number(r.headers.get("x-ratelimit-reset")) * 1000;
+        waitUntil = reset > Date.now() ? reset : Date.now() + TTL;
+        store.set(WAIT, String(waitUntil));
+        return;
+      }
+      if (!r.ok) return;  // e.g. 404: no release yet
+      const j = await r.json();
+      const v = String(j.tag_name || "").replace(/^v/i, ""), d = String(j.published_at || "").slice(0, 10);
+      if (!v) return;
+      store.set(CACHE + p.id, JSON.stringify({ v, d, at: Date.now() }));
+      setVer(p.id, v, d);
+    } catch (e) {}
   });
 })();
 </script>
