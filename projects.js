@@ -53,6 +53,12 @@ window.SH1FTW_PROJECTS = [
     tagline_de: "Merkt sich einen Zustand und stellt ihn später wieder her, außer jemand hat ihn inzwischen von Hand geändert. Moderner Ersatz für Saver.",
   },
   {
+    id: "sf-symbols", name: "SF Symbols", platform: "Home Assistant", repo: "SH1FT-W/sf-symbols",
+    site: "https://github.com/SH1FT-W/sf-symbols", icon: "icons/sf-symbols.png", iconStyle: "mac", color: "#4f6bff",
+    tagline: "Apple's SF Symbols as icons everywhere in Home Assistant: sf: and ios: prefixes, hierarchical and multicolor variants, a drop-in for Cupertino Icons.",
+    tagline_de: "Apples SF Symbols als Icons überall in Home Assistant: Präfixe sf: und ios:, hierarchische und mehrfarbige Varianten, ersetzt Cupertino Icons ohne Umbau.",
+  },
+  {
     id: "unas", name: "UniFi UNAS", platform: "Home Assistant", repo: "SH1FT-W/unifi-unas",
     site: "https://sh1ft-w.github.io/unifi-unas/", icon: "icons/unas.png", iconStyle: "glyph light", color: "#006fff",
     tagline: "UniFi NAS in Home Assistant: storage, drives, data scrubs and health, locally through UniFi OS and UniFi Drive.",
