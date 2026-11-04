@@ -38,8 +38,8 @@ window.SH1FTW_PROJECTS = [
     id: "pflanzenmonitor-plus", name: "Pflanzenmonitor Plus", platform: "Home Assistant", repo: "SH1FT-W/pflanzenmonitor-plus",
     version: "26.11.1", released: "2026-11-02",
     site: "https://sh1ft-w.github.io/pflanzenmonitor-plus/", icon: "icons/pflanzenmonitor-plus.png", iconStyle: "glyph", color: "#4caf50",
-    tagline: "The plant integration that learns: status and limits for every plant, a watering forecast from its own history and AI-suggested limits you approve. Takes over Plant Monitor plants in one step.",
-    tagline_de: "Die Pflanzen-Integration, die mitlernt: Zustand und Grenzwerte für jede Pflanze, eine Gieß-Vorhersage aus ihrem eigenen Verlauf und KI-Grenzwerte mit deiner Freigabe. Übernimmt Plant-Monitor-Pflanzen in einem Schritt.",
+    tagline: "The plant integration that learns: status and limits for every plant, a watering forecast from its own history and AI-suggested limits you approve. Runs on Home Assistant's own statistics.",
+    tagline_de: "Die Pflanzen-Integration, die mitlernt: Zustand und Grenzwerte für jede Pflanze, eine Gieß-Vorhersage aus ihrem eigenen Verlauf und KI-Grenzwerte mit deiner Freigabe. Läuft auf den eigenen Statistiken von Home Assistant.",
   },
   {
     id: "ps5", name: "PS5", platform: "Home Assistant", repo: "SH1FT-W/playstation-5",
