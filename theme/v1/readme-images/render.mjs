@@ -40,7 +40,7 @@ if (!only || only === 'title') {
     const title = Object.assign({}, cfg.title, t, { shot: Object.assign({}, cfg.title.shot, (t && t.shot) || {}) });
     // The window shows `winW` source pixels at winW·s CSS pixels; at the 2× output that is 2·s device pixels per source
     // pixel. Above 0.5 the screenshot would be upscaled and go soft, so the scale is capped there.
-    if (title.shot.s > 0.5) { console.warn(`  shot scale ${title.shot.s} would upscale the screenshot, using 0.5`); title.shot.s = 0.5; }
+    if (title.shot.s > 0.5 && title.layout !== 'center') { console.warn(`  shot scale ${title.shot.s} would upscale the screenshot, using 0.5`); title.shot.s = 0.5; }
     for (const dark of [false, true]) {
       const name = 'readme-title' + (variant ? '-' + variant : '') + (dark ? '-dark' : '-light');
       const png = path.join(outDir, name + '.png');

@@ -38,6 +38,24 @@
   .bar span { margin-left: 10px; font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
   .strip { position: relative; overflow: hidden; width: 100%; }
   .strip img { position: absolute; left: 0; height: auto; }
+  /* layout "center": no window, the project's own mark and words, centred (05.11.2026). */
+  body.center .left { left: 0; right: 0; width: auto; align-items: center; text-align: center; padding-bottom: 6px; }
+  body.center .shot { display: none; }
+  /* Quiet rings around the icon, like a signal from the mark; accent at low strength. */
+  body.center::after { content: ""; position: absolute; left: 50%; top: var(--ring-y, 150px); width: 1400px; height: 1400px; transform: translate(-50%, -50%);
+    border-radius: 50%; pointer-events: none; z-index: -1;
+    background: radial-gradient(circle, var(--glow-1) 0, transparent 12%),
+      repeating-radial-gradient(circle, transparent 0 69px, var(--ring) 69px 70.5px, transparent 70.5px 140px);
+    -webkit-mask-image: radial-gradient(circle, #000 0, rgba(0,0,0,.55) 18%, transparent 42%); mask-image: radial-gradient(circle, #000 0, rgba(0,0,0,.55) 18%, transparent 42%); }
+  body.center .brand { flex-direction: column; gap: 28px; }
+  body.center .brand img { width: 124px; height: 124px; border-radius: 28px; }
+  body.center .brand.wide img { width: auto; height: 150px; border-radius: 0; box-shadow: none; }
+  body.center .brand h1 { font-size: 112px; letter-spacing: -0.04em; }
+  body.center .eyebrow { margin-top: 16px; font-family: var(--body); font-size: 21px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--ink-3); }
+  body.center .lead { margin-top: 18px; font-size: 46px; }
+  body.center .sub { display: none; }
+  body.center .pills { margin-top: 30px; justify-content: center; gap: 10px; }
+  body.center .pill { font-family: var(--body); font-size: 16px; padding: 9px 17px; letter-spacing: 0; }
 </style>
 </head>
 <body>
@@ -57,19 +75,23 @@
   const vars = { bg: C.bg, 'bg-2': C.bg2, ink: C.ink, 'ink-2': C.ink2, 'ink-3': C.ink3, 'accent-text': C.accentText, accent: C.accent, 'accent-2': C.accent2,
     'glow-1': C.glow1, 'glow-2': C.glow2, frame: C.frame, 'pill-bg': C.pillBg, 'pill-line': C.pillLine, win: C.win, bar: C.bar || 'transparent',
     shadow: dark ? '0 30px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35)' : '0 30px 80px rgba(11,18,32,0.22), 0 8px 24px rgba(11,18,32,0.10)',
-    display: T.fonts.display, body: T.fonts.body, mono: T.fonts.mono };
+    display: T.fonts.display, ring: C.ring || C.accent, body: T.fonts.body, mono: T.fonts.mono };
   Object.entries(vars).forEach(([k, v]) => root.setProperty('--' + k, v));
   if (T.grid) document.body.classList.add('grid');
+  if (T.layout === 'center') document.body.classList.add('center');
   document.getElementById('logo').src = T.base + T.logo;
   if (T.logoWide) { document.querySelector('.brand').classList.add('wide'); document.getElementById('logo').alt = T.name; }
   document.getElementById('name').textContent = T.name;
   // Long names (Pflanzenmonitor Plus) wrap at a smaller size: title.nameSize in px, default 68.
-  if (T.nameSize) document.getElementById('name').style.fontSize = T.nameSize + 'px';
+  if (T.nameSize && T.layout !== 'center') document.getElementById('name').style.fontSize = T.nameSize + 'px';
+  // Centred: one size for all, smaller only for long names (Pflanzenmonitor Plus).
+  if (T.layout === 'center' && T.name.length > 16) document.getElementById('name').style.fontSize = '84px';
   document.getElementById('eyebrow').textContent = T.eyebrow;
-  document.getElementById('lead').innerHTML = T.lead;
+  document.getElementById('lead').innerHTML = T.layout === 'center' ? T.lead.replace(/<br\s*\/?>/g, ' ') : T.lead;
   document.getElementById('sub').textContent = T.sub;
   document.getElementById('pills').innerHTML = (T.pills || []).map(([t, v]) => '<span class="pill' + (v ? ' v' : '') + '"><i></i>' + t + '</span>').join('');
   const sh = T.shot, el = document.getElementById('shot');
+  if (T.layout === 'center' || !sh || !sh.strips) { el.remove(); } else {
   el.style.left = sh.left + 'px'; el.style.top = sh.top + 'px'; el.style.width = Math.round(sh.winW * sh.s) + 'px';
   if (sh.flat) el.classList.add('flat');
   let html = sh.bar ? '<div class="bar"><i></i><i></i><i></i><span>' + sh.bar + '</span></div>' : '';
@@ -77,6 +99,13 @@
     html += '<div class="strip" style="height:' + ((y1 - y0) * sh.s) + 'px"><img src="' + T.base + (dark ? sh.dark : sh.light) + '" style="width:' + (sh.srcW * sh.s) + 'px;top:' + (-y0 * sh.s) + 'px" alt=""></div>';
   });
   el.innerHTML = html;
+  }
+  // Centred: the rings sit on the middle of the mark, whatever its height (a wide logo is taller than an icon).
+  if (T.layout === 'center') {
+    const logo = document.getElementById('logo');
+    const place = () => { const r = logo.getBoundingClientRect(); if (r.height) document.body.style.setProperty('--ring-y', Math.round(r.top + r.height / 2) + 'px'); };
+    logo.addEventListener('load', place); document.fonts.ready.then(place); place();
+  }
 </script>
 </body>
 </html>
