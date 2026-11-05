@@ -31,8 +31,8 @@ window.SH1FTW_PROJECTS = [
     id: "jbl-bar", name: "JBL Bar", platform: "Home Assistant", repo: "SH1FT-W/jbl-bar",
     version: "26.10.3", released: "2026-10-19",
     site: "https://sh1ft-w.github.io/jbl-bar/", icon: "icons/jbl-bar.png", iconStyle: "glyph light", color: "#ff6a00",
-    tagline: "JBL soundbars with JBL One, fully local in Home Assistant: fast, complete, no cloud.",
-    tagline_de: "JBL-Soundbars mit JBL One komplett lokal in Home Assistant: schnell, vollständig, ohne Cloud.",
+    tagline: "Your JBL soundbar with JBL One in Home Assistant, fully local: power, volume, source, EQ, rear speakers and the live Dolby Atmos format.",
+    tagline_de: "Deine JBL-Soundbar mit JBL One in Home Assistant, komplett lokal: Ein/Aus, Lautstärke, Quelle, EQ, Rear-Speaker und das Dolby-Atmos-Format live.",
   },
   {
     id: "pflanzenmonitor-plus", name: "Pflanzenmonitor Plus", platform: "Home Assistant", repo: "SH1FT-W/pflanzenmonitor-plus",
