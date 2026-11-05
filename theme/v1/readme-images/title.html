@@ -41,12 +41,6 @@
   /* layout "center": no window, the project's own mark and words, centred (05.11.2026). */
   body.center .left { left: 0; right: 0; width: auto; align-items: center; text-align: center; padding-bottom: 6px; }
   body.center .shot { display: none; }
-  /* Quiet rings around the icon, like a signal from the mark; accent at low strength. */
-  body.center::after { content: ""; position: absolute; left: 50%; top: var(--ring-y, 150px); width: 1400px; height: 1400px; transform: translate(-50%, -50%);
-    border-radius: 50%; pointer-events: none; z-index: -1;
-    background: radial-gradient(circle, var(--glow-1) 0, transparent 12%),
-      repeating-radial-gradient(circle, transparent 0 69px, var(--ring) 69px 70.5px, transparent 70.5px 140px);
-    -webkit-mask-image: radial-gradient(circle, #000 0, rgba(0,0,0,.55) 18%, transparent 42%); mask-image: radial-gradient(circle, #000 0, rgba(0,0,0,.55) 18%, transparent 42%); }
   body.center .brand { flex-direction: column; gap: 28px; }
   body.center .brand img { width: 124px; height: 124px; border-radius: 28px; }
   body.center .brand.wide img { width: auto; height: 150px; border-radius: 0; box-shadow: none; }
@@ -75,7 +69,7 @@
   const vars = { bg: C.bg, 'bg-2': C.bg2, ink: C.ink, 'ink-2': C.ink2, 'ink-3': C.ink3, 'accent-text': C.accentText, accent: C.accent, 'accent-2': C.accent2,
     'glow-1': C.glow1, 'glow-2': C.glow2, frame: C.frame, 'pill-bg': C.pillBg, 'pill-line': C.pillLine, win: C.win, bar: C.bar || 'transparent',
     shadow: dark ? '0 30px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35)' : '0 30px 80px rgba(11,18,32,0.22), 0 8px 24px rgba(11,18,32,0.10)',
-    display: T.fonts.display, ring: C.ring || C.accent, body: T.fonts.body, mono: T.fonts.mono };
+    display: T.fonts.display, body: T.fonts.body, mono: T.fonts.mono };
   Object.entries(vars).forEach(([k, v]) => root.setProperty('--' + k, v));
   if (T.grid) document.body.classList.add('grid');
   if (T.layout === 'center') document.body.classList.add('center');
@@ -99,12 +93,6 @@
     html += '<div class="strip" style="height:' + ((y1 - y0) * sh.s) + 'px"><img src="' + T.base + (dark ? sh.dark : sh.light) + '" style="width:' + (sh.srcW * sh.s) + 'px;top:' + (-y0 * sh.s) + 'px" alt=""></div>';
   });
   el.innerHTML = html;
-  }
-  // Centred: the rings sit on the middle of the mark, whatever its height (a wide logo is taller than an icon).
-  if (T.layout === 'center') {
-    const logo = document.getElementById('logo');
-    const place = () => { const r = logo.getBoundingClientRect(); if (r.height) document.body.style.setProperty('--ring-y', Math.round(r.top + r.height / 2) + 'px'); };
-    logo.addEventListener('load', place); document.fonts.ready.then(place); place();
   }
 </script>
 </body>
