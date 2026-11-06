@@ -63,9 +63,6 @@
     letter-spacing: -.04em; margin: 0 0 22px; text-wrap: balance; }
   h1 em { font-style: normal; background: linear-gradient(90deg, #2997ff, #a78bfa 55%, #ff6a00); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .about { font-size: clamp(18px, 2vw, 22px); line-height: 1.4; color: var(--ink-2); margin: 0 auto; max-width: 620px; text-wrap: pretty; letter-spacing: -.015em; }
-  .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 28px 0 0; }
-  .stat { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 99px; background: var(--tile); box-shadow: 0 0 0 1px var(--tile-ring), var(--shadow); font-size: 14px; font-weight: 500; color: var(--ink-2); }
-  .stat b { color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 700; }
 
   /* Zurück-Pille (nur mit ?from=) */
   #back:not(:empty) { margin-top: 26px; }
@@ -208,8 +205,7 @@
     <div class="wrap">
       <p class="eyebrow reveal"><span class="en">Open source workshop</span><span class="de">Open-Source-Werkstatt</span></p>
       <h1 class="reveal"><span class="en">Small, careful tools<br>for the <em>smart home</em> and the Mac.</span><span class="de">Kleine, sorgfältige Werkzeuge<br>für das <em>smarte Zuhause</em> und den Mac.</span></h1>
-      <p class="about reveal"><span class="en">An independent one-person workshop: integrations and dashboards for Home Assistant, small helpers for the Mac.</span><span class="de">Eine unabhängige Ein-Personen-Werkstatt: Integrationen und Dashboards für Home Assistant, kleine Helfer für den Mac.</span></p>
-      <div class="stats reveal" id="stats"></div>
+      <p class="about reveal"><span class="en">Built for my own home, shared with anyone who needs it too.</span><span class="de">Gebaut für den eigenen Alltag, geteilt für alle, die es auch brauchen.</span></p>
       <div id="back"></div>
       <div class="shelf reveal" id="shelf" aria-hidden="true"></div>
     </div>
@@ -295,9 +291,6 @@
   function render(l) {
     lang = l; t = T[l];
     document.querySelector('meta[name="description"]').content = t.desc;
-    const live = projects.filter((p) => !p.soon), soon = projects.filter((p) => p.soon);
-    document.getElementById("stats").innerHTML =
-      `<span class="stat"><b>${live.length}</b> ${t.released}</span>` + (soon.length ? `<span class="stat"><b>${soon.length}</b> ${t.coming}</span>` : "");
     document.getElementById("shelf").innerHTML = projects.map((p) =>
       p.soon ? `<span class="soon">${icon(p)}</span>` : `<a href="${esc(p.site)}" title="${esc(p.name)}" tabindex="-1">${icon(p)}</a>`).join("");
     document.getElementById("navlinks").innerHTML = groups.map((g) => `<a href="#${slug(g.name)}">${esc(label(g.name))}</a>`).join("");
