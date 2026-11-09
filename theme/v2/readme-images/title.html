@@ -33,10 +33,16 @@
   const m = document.getElementById("mark");
   if (d.icon) { m.src = d.base + d.icon; if (d.wordmark) m.classList.add("logo"); } else m.remove();
   const h = document.getElementById("name"); h.innerHTML = d.name;
+  // A project with its own wordmark face (title.nameFont, loaded from fonts.google) sets the name in it, upright.
+  if (d.nameFont) {
+    if (d.fontCss) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = d.fontCss; document.head.appendChild(l); }
+    h.style.cssText = `font-family:${d.nameFont};font-style:normal;font-stretch:100%;font-weight:${d.nameWeight || 800};letter-spacing:-0.04em`;
+  }
   document.getElementById("sub").innerHTML = d.sub || "";
   document.getElementById("lanes").innerHTML = d.lanes.map((t) => `<div class="s-lane"><div class="s-track"><b>${t}</b></div></div>`).join("");
   // Fit: a long name first gets smaller, below 52 px it may wrap; lane texts shrink together until the longest fits.
-  document.fonts.ready.then(() => {
+  const fontsIn = () => (d.nameFont ? document.fonts.load(`${d.nameWeight || 800} 72px ${d.nameFont}`).catch(() => {}) : Promise.resolve()).then(() => document.fonts.ready);
+  new Promise((r) => setTimeout(r, d.nameFont ? 400 : 0)).then(fontsIn).then(() => {
     const col = document.getElementById("left").clientWidth;
     let fs = parseFloat(getComputedStyle(h).fontSize);
     while (h.scrollWidth > col && fs > 52) { fs -= 2; h.style.fontSize = fs + "px"; }

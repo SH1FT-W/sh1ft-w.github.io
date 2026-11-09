@@ -11,6 +11,8 @@
 //   logo            icon, path inside the repository; "wordmark": true shows it wide without rounded corners
 //                   (older files say "logoWide")
 //   laneA, laneB    lane colours; without them colors.light.accent and a lighter mix of it
+//   nameFont        the project's own face for the name, e.g. "\"Inter\", sans-serif" (upright; loaded from fonts.google
+//                   in the same file, only while rendering); nameWeight defaults to 800
 //   onLane          text colour on the lanes (default white; set a dark one for light accents)
 // and from "colors": light/dark bg, ink, ink2. Needs the playwright package (npm install here).
 import { createRequire } from 'node:module';
@@ -50,6 +52,7 @@ if (arg === '--footer') {
         lanes: (t.lanes || (t.pills || []).map((p) => p[0])).slice(0, 3),
         laneA: t.laneA || cfg.colors.light.accent, laneB: t.laneB, onLane: t.onLane,
         bg: c.bg, ink: c.ink, ink2: c.ink2, dark, base: 'file://' + repo + '/',
+        nameFont: t.nameFont, nameWeight: t.nameWeight, fontCss: t.nameFont ? (cfg.fonts || {}).google : undefined,
       };
       const name = 'readme-title' + (variant ? '-' + variant : '') + (dark ? '-dark' : '-light');
       const png = path.join(outDir, name + '.png');
