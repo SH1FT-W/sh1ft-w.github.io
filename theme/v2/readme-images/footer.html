@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../theme.css">
+<style>
+  html, body { width: 1280px; height: 132px; overflow: hidden; background: transparent; }
+  body { display: grid; align-items: center; padding: 0 40px; }
+  .s-lane { height: 92px; margin: 0 !important; }
+  .s-track { width: 100%; justify-content: center; gap: 14px; padding: 0; }
+  .ic { --s: 52px; position: relative; display: block; width: var(--s); height: var(--s); border-radius: calc(var(--s) * .2237); overflow: hidden; box-shadow: 0 6px 16px -6px rgba(60,0,30,.45); }
+  .ic img { position: absolute; inset: 0; width: 100%; max-width: none; height: 100%; }
+  .ic.mac img { inset: -12.15%; width: 124.3%; height: 124.3%; }
+  .ic.glyph { background: #fff; }
+  .ic.glyph img { inset: 15%; width: 70%; height: 70%; }
+</style></head><body>
+<div class="s-lanes"><div class="s-lane"><div class="s-track" id="t"></div></div></div>
+<script src="../../../projects.js"></script>
+<script>
+  // README footer strip: every released project on one brand lane. One image for all READMEs, light and dark (transparent).
+  document.getElementById("t").innerHTML = window.SH1FTW_PROJECTS.filter((p) => !p.soon).map((p) =>
+    `<span class="ic ${p.iconStyle || ""}"><img src="../../../${p.icon}"></span>`).join("");
+</script></body></html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../theme.css">
+<style>
+  /* README title in the v2 design: icon, name and one line on the left, three lanes with the key facts on the right.
+     Two sizes from the same markup: the README banner (1280 x 440, html.slim) and the social preview (1280 x 640). */
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body { display: grid; grid-template-columns: 590px 1fr; align-items: center; gap: 44px; padding: 0 0 0 84px; background: var(--bg); }
+  .mark { display: block; height: 84px; width: auto; border-radius: 19px; margin-bottom: 30px; }
+  .mark.logo { height: 104px; border-radius: 0; }
+  h1 { font-size: 78px; line-height: .98; white-space: nowrap; }
+  h1.wrap { white-space: normal; max-width: 560px; }
+  p { margin: 22px 0 0; font-size: 27px; line-height: 1.3; color: var(--ink-2); font-weight: 450; max-width: 500px; text-wrap: balance; }
+  .s-lanes { margin-right: -150px; gap: 16px; }
+  .s-lane { height: 100px; }
+  .s-track { padding: 0 44px; }
+  .s-track b { color: var(--on-lane, #fff); font: italic 800 35px/1 var(--font); font-stretch: 116%; letter-spacing: -0.015em; white-space: nowrap; }
+  html.slim, html.slim body { height: 440px; }
+  html.slim .mark { height: 68px; margin-bottom: 22px; border-radius: 16px; } html.slim .mark.logo { height: 84px; border-radius: 0; }
+  html.slim h1 { font-size: 72px; }
+  html.slim p { font-size: 25px; margin-top: 16px; }
+  html.slim .s-lane { height: 84px; } html.slim .s-lanes { gap: 14px; } html.slim .s-track b { font-size: 32px; }
+</style></head><body>
+<div id="left"><img class="mark" id="mark" alt=""><h1 id="name"></h1><p id="sub"></p></div>
+<div class="s-lanes" id="lanes"></div>
+<script>
+  // window.CFG comes from render.mjs: { name, sub, icon, wordmark, lanes[], laneA, laneB, onLane, bg, ink, ink2, dark, slim, base }
+  const d = window.CFG, root = document.documentElement;
+  root.dataset.theme = d.dark ? "dark" : "light";
+  if (d.slim) root.classList.add("slim");
+  const set = (k, v) => { if (v) root.style.setProperty(k, v); };
+  set("--bg", d.bg); set("--ink", d.ink); set("--ink-2", d.ink2); set("--lane-a", d.laneA); set("--lane-b", d.laneB || `color-mix(in srgb, ${d.laneA} 68%, white)`); set("--on-lane", d.onLane);
+  const m = document.getElementById("mark");
+  if (d.icon) { m.src = d.base + d.icon; if (d.wordmark) m.classList.add("logo"); } else m.remove();
+  const h = document.getElementById("name"); h.innerHTML = d.name;
+  document.getElementById("sub").innerHTML = d.sub || "";
+  document.getElementById("lanes").innerHTML = d.lanes.map((t) => `<div class="s-lane"><div class="s-track"><b>${t}</b></div></div>`).join("");
+  // Fit: a long name first gets smaller, below 52 px it may wrap; lane texts shrink together until the longest fits.
+  document.fonts.ready.then(() => {
+    const col = document.getElementById("left").clientWidth;
+    let fs = parseFloat(getComputedStyle(h).fontSize);
+    while (h.scrollWidth > col && fs > 52) { fs -= 2; h.style.fontSize = fs + "px"; }
+    if (h.scrollWidth > col) h.classList.add("wrap");
+    const bs = [...document.querySelectorAll(".s-track b")];
+    let ls = parseFloat(getComputedStyle(bs[0]).fontSize);
+    const room = 1280 - document.getElementById("lanes").getBoundingClientRect().left - 150;
+    while (Math.max(...bs.map((b) => b.getBoundingClientRect().width)) > room && ls > 20) { ls -= 1; bs.forEach((b) => (b.style.fontSize = ls + "px")); }
+    window.READY = true;
+  });
+</script></body></html>
